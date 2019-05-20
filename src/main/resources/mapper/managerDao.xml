@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicom.salesmanagebehind.dao.managerDao">
+  <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.Manager">
+    <id column="managerId" jdbcType="INTEGER" property="managerId" />
+    <result column="managerName" jdbcType="VARCHAR" property="managerName" />
+    <result column="loginName" jdbcType="VARCHAR" property="loginName" />
+    <result column="managerSex" jdbcType="VARCHAR" property="managerSex" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="managerTel" jdbcType="VARCHAR" property="managerTel" />
+    <result column="managerEmail" jdbcType="VARCHAR" property="managerEmail" />
+    <result column="role" jdbcType="INT" property="role" />
+    <result column="isDelete" jdbcType="INT" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    managerId, managerName, loginName, managerSex, password, managerTel, managerEmail, 
+    role, isDelete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from manager
+    where managerId = #{managerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="int">
+    delete from manager
+    where managerId = #{managerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Manager">
+    <selectKey keyProperty="managerId" order="AFTER" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into manager (managerName, loginName, managerSex, 
+      password, managerTel, managerEmail, 
+      role, isDelete)
+    values (#{managerName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{managerSex,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{managerTel,jdbcType=VARCHAR}, #{managerEmail,jdbcType=VARCHAR}, 
+      #{role,jdbcType=INT}, #{isDelete,jdbcType=INT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Manager">
+    <selectKey keyProperty="managerId" order="AFTER" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into manager
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="managerName != null">
+        managerName,
+      </if>
+      <if test="loginName != null">
+        loginName,
+      </if>
+      <if test="managerSex != null">
+        managerSex,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="managerTel != null">
+        managerTel,
+      </if>
+      <if test="managerEmail != null">
+        managerEmail,
+      </if>
+      role,
+      isDelete,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="managerName != null">
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerSex != null">
+        #{managerSex,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="managerTel != null">
+        #{managerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="managerEmail != null">
+        #{managerEmail,jdbcType=VARCHAR},
+      </if>
+      #{role,jdbcType=INT},
+      #{isDelete,jdbcType=INT},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicom.salesmanagebehind.model.Manager">
+    update manager
+    <set>
+      <if test="managerName != null">
+        managerName = #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        loginName = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerSex != null">
+        managerSex = #{managerSex,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="managerTel != null">
+        managerTel = #{managerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="managerEmail != null">
+        managerEmail = #{managerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=INT},
+      </if>
+      <if test="isDelete != null">
+        isDelete = #{isDelete,jdbcType=INT},
+      </if>
+    </set>
+    where managerId = #{managerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicom.salesmanagebehind.model.Manager">
+    update manager
+    set managerName = #{managerName,jdbcType=VARCHAR},
+      loginName = #{loginName,jdbcType=VARCHAR},
+      managerSex = #{managerSex,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      managerTel = #{managerTel,jdbcType=VARCHAR},
+      managerEmail = #{managerEmail,jdbcType=VARCHAR},
+      role = #{role,jdbcType=INT},
+      isDelete = #{isDelete,jdbcType=INT}
+    where managerId = #{managerId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicom.salesmanagebehind.dao.productDao">
+  <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.Product">
+    <id column="productId" jdbcType="INT" property="productId" />
+    <result column="productName" jdbcType="VARCHAR" property="productName" />
+    <result column="productFee" jdbcType="INT" property="productFee" />
+    <result column="recommend" jdbcType="VARCHAR" property="recommend" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="isFirstPush" jdbcType="INT" property="isFirstPush" />
+    <result column="startTime" jdbcType="DATETIME" property="startTime" />
+    <result column="endTime" jdbcType="DATETIME" property="endTime" />
+    <result column="updateUserId" jdbcType="INT" property="updateUserId" />
+    <result column="updateTime" jdbcType="DATETIME" property="updateTime" />
+    <result column="imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="isDelete" jdbcType="INT" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    productId, productName, productFee, recommend, description, isFirstPush, startTime, 
+    endTime, updateUserId, updateTime, imgUrl, isDelete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where productId = #{productId,jdbcType=INT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="int">
+    delete from product
+    where productId = #{productId,jdbcType=INT}
+  </delete>
+  <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Product">
+    <selectKey keyProperty="productId" order="AFTER" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into product (productName, productFee, recommend, 
+      description, isFirstPush, startTime, 
+      endTime, updateUserId, updateTime, 
+      imgUrl, isDelete)
+    values (#{productName,jdbcType=VARCHAR}, #{productFee,jdbcType=INT}, #{recommend,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{isFirstPush,jdbcType=INT}, #{startTime,jdbcType=DATETIME}, 
+      #{endTime,jdbcType=DATETIME}, #{updateUserId,jdbcType=INT}, #{updateTime,jdbcType=DATETIME}, 
+      #{imgUrl,jdbcType=VARCHAR}, #{isDelete,jdbcType=INT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Product">
+    <selectKey keyProperty="productId" order="AFTER" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productName != null">
+        productName,
+      </if>
+      productFee,
+      <if test="recommend != null">
+        recommend,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      isFirstPush,
+      <if test="startTime != null">
+        startTime,
+      </if>
+      <if test="endTime != null">
+        endTime,
+      </if>
+      updateUserId,
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="imgUrl != null">
+        imgUrl,
+      </if>
+      isDelete,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      #{productFee,jdbcType=INT},
+      <if test="recommend != null">
+        #{recommend,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      #{isFirstPush,jdbcType=INT},
+      <if test="startTime != null">
+        #{startTime,jdbcType=DATETIME},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=DATETIME},
+      </if>
+      #{updateUserId,jdbcType=INT},
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=DATETIME},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      #{isDelete,jdbcType=INT},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicom.salesmanagebehind.model.Product">
+    update product
+    <set>
+      <if test="productName != null">
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productFee != null">
+        productFee = #{productFee,jdbcType=INT},
+      </if>
+      <if test="recommend != null">
+        recommend = #{recommend,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isFirstPush != null">
+        isFirstPush = #{isFirstPush,jdbcType=INT},
+      </if>
+      <if test="startTime != null">
+        startTime = #{startTime,jdbcType=DATETIME},
+      </if>
+      <if test="endTime != null">
+        endTime = #{endTime,jdbcType=DATETIME},
+      </if>
+      <if test="updateUserId != null">
+        updateUserId = #{updateUserId,jdbcType=INT},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=DATETIME},
+      </if>
+      <if test="imgUrl != null">
+        imgUrl = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        isDelete = #{isDelete,jdbcType=INT},
+      </if>
+    </set>
+    where productId = #{productId,jdbcType=INT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicom.salesmanagebehind.model.Product">
+    update product
+    set productName = #{productName,jdbcType=VARCHAR},
+      productFee = #{productFee,jdbcType=INT},
+      recommend = #{recommend,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      isFirstPush = #{isFirstPush,jdbcType=INT},
+      startTime = #{startTime,jdbcType=DATETIME},
+      endTime = #{endTime,jdbcType=DATETIME},
+      updateUserId = #{updateUserId,jdbcType=INT},
+      updateTime = #{updateTime,jdbcType=DATETIME},
+      imgUrl = #{imgUrl,jdbcType=VARCHAR},
+      isDelete = #{isDelete,jdbcType=INT}
+    where productId = #{productId,jdbcType=INT}
+  </update>
+</mapper>

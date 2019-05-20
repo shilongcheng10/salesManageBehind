@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicom.salesmanagebehind.dao.noticeDao">
+  <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.Notice">
+    <id column="noticeId" jdbcType="INTEGER" property="noticeId" />
+    <result column="noticeTitle" jdbcType="VARCHAR" property="noticeTitle" />
+    <result column="noticeContent" jdbcType="VARCHAR" property="noticeContent" />
+    <result column="updateTime" jdbcType="VARCHAR" property="updateTime" />
+    <result column="updateUserId" jdbcType="VARCHAR" property="updateUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    noticeId, noticeTitle, noticeContent, updateTime, updateUserId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from notice
+    where noticeId = #{noticeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from notice
+    where noticeId = #{noticeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Notice">
+    <selectKey keyProperty="noticeId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into notice (noticeTitle, noticeContent, updateTime, 
+      updateUserId)
+    values (#{noticeTitle,jdbcType=VARCHAR}, #{noticeContent,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Notice">
+    <selectKey keyProperty="noticeId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="noticeTitle != null">
+        noticeTitle,
+      </if>
+      <if test="noticeContent != null">
+        noticeContent,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="updateUserId != null">
+        updateUserId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="noticeTitle != null">
+        #{noticeTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeContent != null">
+        #{noticeContent,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicom.salesmanagebehind.model.Notice">
+    update notice
+    <set>
+      <if test="noticeTitle != null">
+        noticeTitle = #{noticeTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeContent != null">
+        noticeContent = #{noticeContent,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null">
+        updateUserId = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where noticeId = #{noticeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicom.salesmanagebehind.model.Notice">
+    update notice
+    set noticeTitle = #{noticeTitle,jdbcType=VARCHAR},
+      noticeContent = #{noticeContent,jdbcType=VARCHAR},
+      updateTime = #{updateTime,jdbcType=VARCHAR},
+      updateUserId = #{updateUserId,jdbcType=VARCHAR}
+    where noticeId = #{noticeId,jdbcType=INTEGER}
+  </update>
+</mapper>

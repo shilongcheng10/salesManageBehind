@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicom.salesmanagebehind.dao.salemanDao">
+  <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.Saleman">
+    <id column="saleId" jdbcType="INT" property="saleId" />
+    <result column="saleName" jdbcType="VARCHAR" property="saleName" />
+    <result column="saleSex" jdbcType="INT" property="saleSex" />
+    <result column="saleTelNum" jdbcType="VARCHAR" property="saleTelNum" />
+    <result column="commision" jdbcType="VARCHAR" property="commision" />
+    <result column="saleProductNum" jdbcType="INT" property="saleProductNum" />
+    <result column="saleTotalPrice" jdbcType="INT" property="saleTotalPrice" />
+    <result column="isDelete" jdbcType="INT" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    saleId, saleName, saleSex, saleTelNum, commision, saleProductNum, saleTotalPrice, 
+    isDelete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from saleman
+    where saleId = #{saleId,jdbcType=INT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="int">
+    delete from saleman
+    where saleId = #{saleId,jdbcType=INT}
+  </delete>
+  <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Saleman">
+    <selectKey keyProperty="saleId" order="AFTER" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into saleman (saleName, saleSex, saleTelNum, 
+      commision, saleProductNum, saleTotalPrice, 
+      isDelete)
+    values (#{saleName,jdbcType=VARCHAR}, #{saleSex,jdbcType=INT}, #{saleTelNum,jdbcType=VARCHAR}, 
+      #{commision,jdbcType=VARCHAR}, #{saleProductNum,jdbcType=INT}, #{saleTotalPrice,jdbcType=INT}, 
+      #{isDelete,jdbcType=INT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Saleman">
+    <selectKey keyProperty="saleId" order="AFTER" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into saleman
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="saleName != null">
+        saleName,
+      </if>
+      saleSex,
+      <if test="saleTelNum != null">
+        saleTelNum,
+      </if>
+      <if test="commision != null">
+        commision,
+      </if>
+      saleProductNum,
+      saleTotalPrice,
+      isDelete,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="saleName != null">
+        #{saleName,jdbcType=VARCHAR},
+      </if>
+      #{saleSex,jdbcType=INT},
+      <if test="saleTelNum != null">
+        #{saleTelNum,jdbcType=VARCHAR},
+      </if>
+      <if test="commision != null">
+        #{commision,jdbcType=VARCHAR},
+      </if>
+      #{saleProductNum,jdbcType=INT},
+      #{saleTotalPrice,jdbcType=INT},
+      #{isDelete,jdbcType=INT},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicom.salesmanagebehind.model.Saleman">
+    update saleman
+    <set>
+      <if test="saleName != null">
+        saleName = #{saleName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleSex != null">
+        saleSex = #{saleSex,jdbcType=INT},
+      </if>
+      <if test="saleTelNum != null">
+        saleTelNum = #{saleTelNum,jdbcType=VARCHAR},
+      </if>
+      <if test="commision != null">
+        commision = #{commision,jdbcType=VARCHAR},
+      </if>
+      <if test="saleProductNum != null">
+        saleProductNum = #{saleProductNum,jdbcType=INT},
+      </if>
+      <if test="saleTotalPrice != null">
+        saleTotalPrice = #{saleTotalPrice,jdbcType=INT},
+      </if>
+      <if test="isDelete != null">
+        isDelete = #{isDelete,jdbcType=INT},
+      </if>
+    </set>
+    where saleId = #{saleId,jdbcType=INT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicom.salesmanagebehind.model.Saleman">
+    update saleman
+    set saleName = #{saleName,jdbcType=VARCHAR},
+      saleSex = #{saleSex,jdbcType=INT},
+      saleTelNum = #{saleTelNum,jdbcType=VARCHAR},
+      commision = #{commision,jdbcType=VARCHAR},
+      saleProductNum = #{saleProductNum,jdbcType=INT},
+      saleTotalPrice = #{saleTotalPrice,jdbcType=INT},
+      isDelete = #{isDelete,jdbcType=INT}
+    where saleId = #{saleId,jdbcType=INT}
+  </update>
+</mapper>
