@@ -29,7 +29,6 @@ HELP.md
 .vscode/
 
 # Compiled class file
-/.mvn/
 *.class
 # Log file
 *.log
