@@ -15,6 +15,11 @@
     saleId, saleName, saleSex, saleTelNum, commision, saleProductNum, saleTotalPrice, 
     isDelete
   </sql>
+  <select id="getAllSaleman" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from saleman
+  </select>
   <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

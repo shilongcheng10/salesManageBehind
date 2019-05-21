@@ -7,4 +7,8 @@ import java.util.List;
 public interface SalemanService {
 
     List<Saleman> getAllSaleman();
+
+    int deleteByPrimaryKey(int saleId);
+
 }
+
