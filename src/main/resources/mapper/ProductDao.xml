@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.unicom.salesmanagebehind.dao.productDao">
+<mapper namespace="com.unicom.salesmanagebehind.dao.ProductDao">
   <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.Product">
-    <id column="productId" jdbcType="INT" property="productId" />
+    <id column="productId" jdbcType="INTEGER" property="productId" />
     <result column="productName" jdbcType="VARCHAR" property="productName" />
-    <result column="productFee" jdbcType="INT" property="productFee" />
+    <result column="productFee" jdbcType="INTEGER" property="productFee" />
     <result column="recommend" jdbcType="VARCHAR" property="recommend" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="isFirstPush" jdbcType="INT" property="isFirstPush" />
-    <result column="startTime" jdbcType="DATETIME" property="startTime" />
-    <result column="endTime" jdbcType="DATETIME" property="endTime" />
-    <result column="updateUserId" jdbcType="INT" property="updateUserId" />
-    <result column="updateTime" jdbcType="DATETIME" property="updateTime" />
+    <result column="isFirstPush" jdbcType="INTEGER" property="isFirstPush" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="updateUserId" jdbcType="INTEGER" property="updateUserId" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="imgUrl" jdbcType="VARCHAR" property="imgUrl" />
-    <result column="isDelete" jdbcType="INT" property="isDelete" />
+    <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
     productId, productName, productFee, recommend, description, isFirstPush, startTime, 
     endTime, updateUserId, updateTime, imgUrl, isDelete
   </sql>
-  <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from product
-    where productId = #{productId,jdbcType=INT}
+    where productId = #{productId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="int">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from product
-    where productId = #{productId,jdbcType=INT}
+    where productId = #{productId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Product">
-    <selectKey keyProperty="productId" order="AFTER" resultType="int">
+    <selectKey keyProperty="productId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into product (productName, productFee, recommend, 
       description, isFirstPush, startTime, 
       endTime, updateUserId, updateTime, 
       imgUrl, isDelete)
-    values (#{productName,jdbcType=VARCHAR}, #{productFee,jdbcType=INT}, #{recommend,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{isFirstPush,jdbcType=INT}, #{startTime,jdbcType=DATETIME}, 
-      #{endTime,jdbcType=DATETIME}, #{updateUserId,jdbcType=INT}, #{updateTime,jdbcType=DATETIME}, 
-      #{imgUrl,jdbcType=VARCHAR}, #{isDelete,jdbcType=INT})
+    values (#{productName,jdbcType=VARCHAR}, #{productFee,jdbcType=INTEGER}, #{recommend,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR}, #{isFirstPush,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP},
+      #{endTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP},
+      #{imgUrl,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Product">
-    <selectKey keyProperty="productId" order="AFTER" resultType="int">
+    <selectKey keyProperty="productId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into product
@@ -78,28 +78,28 @@
       <if test="productName != null">
         #{productName,jdbcType=VARCHAR},
       </if>
-      #{productFee,jdbcType=INT},
+      #{productFee,jdbcType=INTEGER},
       <if test="recommend != null">
         #{recommend,jdbcType=VARCHAR},
       </if>
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
-      #{isFirstPush,jdbcType=INT},
+      #{isFirstPush,jdbcType=INTEGER},
       <if test="startTime != null">
-        #{startTime,jdbcType=DATETIME},
+        #{startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="endTime != null">
-        #{endTime,jdbcType=DATETIME},
+        #{endTime,jdbcType=TIMESTAMP},
       </if>
-      #{updateUserId,jdbcType=INT},
+      #{updateUserId,jdbcType=INTEGER},
       <if test="updateTime != null">
-        #{updateTime,jdbcType=DATETIME},
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="imgUrl != null">
         #{imgUrl,jdbcType=VARCHAR},
       </if>
-      #{isDelete,jdbcType=INT},
+      #{isDelete,jdbcType=INTEGER},
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.unicom.salesmanagebehind.model.Product">
@@ -109,7 +109,7 @@
         productName = #{productName,jdbcType=VARCHAR},
       </if>
       <if test="productFee != null">
-        productFee = #{productFee,jdbcType=INT},
+        productFee = #{productFee,jdbcType=INTEGER},
       </if>
       <if test="recommend != null">
         recommend = #{recommend,jdbcType=VARCHAR},
@@ -118,42 +118,42 @@
         description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="isFirstPush != null">
-        isFirstPush = #{isFirstPush,jdbcType=INT},
+        isFirstPush = #{isFirstPush,jdbcType=INTEGER},
       </if>
       <if test="startTime != null">
-        startTime = #{startTime,jdbcType=DATETIME},
+        startTime = #{startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="endTime != null">
-        endTime = #{endTime,jdbcType=DATETIME},
+        endTime = #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUserId != null">
-        updateUserId = #{updateUserId,jdbcType=INT},
+        updateUserId = #{updateUserId,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null">
-        updateTime = #{updateTime,jdbcType=DATETIME},
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="imgUrl != null">
         imgUrl = #{imgUrl,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null">
-        isDelete = #{isDelete,jdbcType=INT},
+        isDelete = #{isDelete,jdbcType=INTEGER},
       </if>
     </set>
-    where productId = #{productId,jdbcType=INT}
+    where productId = #{productId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.unicom.salesmanagebehind.model.Product">
     update product
     set productName = #{productName,jdbcType=VARCHAR},
-      productFee = #{productFee,jdbcType=INT},
+      productFee = #{productFee,jdbcType=INTEGER},
       recommend = #{recommend,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      isFirstPush = #{isFirstPush,jdbcType=INT},
-      startTime = #{startTime,jdbcType=DATETIME},
-      endTime = #{endTime,jdbcType=DATETIME},
-      updateUserId = #{updateUserId,jdbcType=INT},
-      updateTime = #{updateTime,jdbcType=DATETIME},
+      isFirstPush = #{isFirstPush,jdbcType=INTEGER},
+      startTime = #{startTime,jdbcType=TIMESTAMP},
+      endTime = #{endTime,jdbcType=TIMESTAMP},
+      updateUserId = #{updateUserId,jdbcType=INTEGER},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
       imgUrl = #{imgUrl,jdbcType=VARCHAR},
-      isDelete = #{isDelete,jdbcType=INT}
-    where productId = #{productId,jdbcType=INT}
+      isDelete = #{isDelete,jdbcType=INTEGER}
+    where productId = #{productId,jdbcType=INTEGER}
   </update>
 </mapper>
