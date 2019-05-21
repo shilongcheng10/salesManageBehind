@@ -22,19 +22,18 @@
     <include refid="Base_Column_List" />
     from manager
   </select>
-
-  <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="INTEGER" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from manager
     where managerId = #{managerId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="int">
+  <delete id="deleteByPrimaryKey" parameterType="INTEGER">
     delete from manager
     where managerId = #{managerId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Manager">
-    <selectKey keyProperty="managerId" order="AFTER" resultType="int">
+    <selectKey keyProperty="managerId" order="AFTER" resultType="INTEGER">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into manager (managerName, loginName, managerSex, 
@@ -45,7 +44,7 @@
       #{role,jdbcType=INT}, #{isDelete,jdbcType=INT})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Manager">
-    <selectKey keyProperty="managerId" order="AFTER" resultType="int">
+    <selectKey keyProperty="managerId" order="AFTER" resultType="INTEGER">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into manager

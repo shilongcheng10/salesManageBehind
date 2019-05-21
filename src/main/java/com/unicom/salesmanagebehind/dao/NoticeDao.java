@@ -2,7 +2,7 @@ package com.unicom.salesmanagebehind.dao;
 
 import com.unicom.salesmanagebehind.model.Notice;
 
-public interface noticeDao {
+public interface NoticeDao {
     int deleteByPrimaryKey(Integer noticeId);
 
     int insert(Notice record);
