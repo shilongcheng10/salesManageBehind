@@ -2,7 +2,7 @@ package com.unicom.salesmanagebehind.dao;
 
 import com.unicom.salesmanagebehind.model.Sales;
 
-public interface salesDao {
+public interface SalesDao {
     int deleteByPrimaryKey(int saleId);
 
     int insert(Sales record);

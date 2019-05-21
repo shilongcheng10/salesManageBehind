@@ -2,7 +2,7 @@ package com.unicom.salesmanagebehind.dao;
 
 import com.unicom.salesmanagebehind.model.Saleman;
 
-public interface salemanDao {
+public interface SalemanDao {
     int deleteByPrimaryKey(int saleId);
 
     int insert(Saleman record);
