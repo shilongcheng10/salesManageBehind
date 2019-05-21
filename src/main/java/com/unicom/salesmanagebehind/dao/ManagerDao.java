@@ -2,7 +2,12 @@ package com.unicom.salesmanagebehind.dao;
 
 import com.unicom.salesmanagebehind.model.Manager;
 
-public interface managerDao {
+import java.util.List;
+
+public interface ManagerDao {
+
+    List<Manager> getList();
+
     int deleteByPrimaryKey(int managerId);
 
     int insert(Manager record);

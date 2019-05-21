@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.unicom.salesmanagebehind.dao.managerDao">
+<mapper namespace="com.unicom.salesmanagebehind.dao.ManagerDao">
   <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.Manager">
     <id column="managerId" jdbcType="INTEGER" property="managerId" />
     <result column="managerName" jdbcType="VARCHAR" property="managerName" />
@@ -16,6 +16,13 @@
     managerId, managerName, loginName, managerSex, password, managerTel, managerEmail, 
     role, isDelete
   </sql>
+
+  <select id="getList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from manager
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
