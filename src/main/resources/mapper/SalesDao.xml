@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.unicom.salesmanagebehind.dao.SalesDao">
   <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.Sales">
-    <id column="saleId" jdbcType="INT" property="saleId" />
-    <result column="salemanId" jdbcType="INT" property="salemanId" />
-    <result column="productId" jdbcType="INT" property="productId" />
-    <result column="date" jdbcType="DATETIME" property="date" />
+    <id column="saleId" jdbcType="INTEGER" property="saleId" />
+    <result column="salemanId" jdbcType="INTEGER" property="salemanId" />
+    <result column="productId" jdbcType="INTEGER" property="productId" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
     <result column="address" jdbcType="VARCHAR" property="address" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -15,11 +15,11 @@
     select
     <include refid="Base_Column_List" />
     from sales
-    where saleId = #{saleId,jdbcType=INT}
+    where saleId = #{saleId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="int">
     delete from sales
-    where saleId = #{saleId,jdbcType=INT}
+    where saleId = #{saleId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Sales">
     <selectKey keyProperty="saleId" order="AFTER" resultType="int">
@@ -27,7 +27,7 @@
     </selectKey>
     insert into sales (salemanId, productId, date,
       address)
-    values (#{salemanId,jdbcType=INT}, #{productId,jdbcType=INT}, #{date,jdbcType=DATETIME},
+    values (#{salemanId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP},
       #{address,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Sales">
@@ -46,10 +46,10 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{salemanId,jdbcType=INT},
-      #{productId,jdbcType=INT},
+      #{salemanId,jdbcType=INTEGER},
+      #{productId,jdbcType=INTEGER},
       <if test="date != null">
-        #{date,jdbcType=DATETIME},
+        #{date,jdbcType=TIMESTAMP},
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
@@ -60,28 +60,26 @@
     update sales
     <set>
       <if test="salemanId != null">
-        salemanId = #{salemanId,jdbcType=INT},
+        salemanId = #{salemanId,jdbcType=INTEGER},
       </if>
       <if test="productId != null">
-        productId = #{productId,jdbcType=INT},
+        productId = #{productId,jdbcType=INTEGER},
       </if>
       <if test="date != null">
-        date = #{date,jdbcType=DATETIME},
+        date = #{date,jdbcType=TIMESTAMP},
       </if>
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
       </if>
     </set>
-    where saleId = #{saleId,jdbcType=INT}
+    where saleId = #{saleId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.unicom.salesmanagebehind.model.Sales">
     update sales
-    set salemanId = #{salemanId,jdbcType=INT},
-      productId = #{productId,jdbcType=INT},
-      date = #{date,jdbcType=DATETIME},
+    set salemanId = #{salemanId,jdbcType=INTEGER},
+      productId = #{productId,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
       address = #{address,jdbcType=VARCHAR}
-    where saleId = #{saleId,jdbcType=INT}
+    where saleId = #{saleId,jdbcType=INTEGER}
   </update>
-
-
 </mapper>
