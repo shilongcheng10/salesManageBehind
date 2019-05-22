@@ -32,8 +32,8 @@
     insert into saleman (saleName, saleSex, saleTelNum, 
       commision, saleProductNum, saleTotalPrice, 
       isDelete)
-    values (#{saleName,jdbcType=VARCHAR}, #{saleSex,jdbcType=INTEGER}, #{saleTelNum,jdbcType=VARCHAR}, 
-      #{commision,jdbcType=VARCHAR}, #{saleProductNum,jdbcType=INTEGER}, #{saleTotalPrice,jdbcType=INTEGER}, 
+    values (#{saleName,jdbcType=VARCHAR}, #{saleSex,jdbcType=INTEGER}, #{saleTelNum,jdbcType=VARCHAR},
+      #{commision,jdbcType=VARCHAR}, #{saleProductNum,jdbcType=INTEGER}, #{saleTotalPrice,jdbcType=INTEGER},
       #{isDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Saleman">

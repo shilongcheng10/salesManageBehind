@@ -27,7 +27,7 @@
     </selectKey>
     insert into sales (salemanId, productId, date, 
       address)
-    values (#{salemanId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, 
+    values (#{salemanId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP},
       #{address,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Sales">

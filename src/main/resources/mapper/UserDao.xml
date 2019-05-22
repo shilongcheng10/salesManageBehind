@@ -40,9 +40,9 @@
       status, activeDate, onlineTime, 
       isCbss, IDCard, cardType
       )
-    values (#{userName,jdbcType=VARCHAR}, #{userSex,jdbcType=INTEGER}, #{userAge,jdbcType=INTEGER}, 
-      #{birth,jdbcType=TIMESTAMP}, #{productId,jdbcType=INTEGER}, #{fee,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{activeDate,jdbcType=TIMESTAMP}, #{onlineTime,jdbcType=INTEGER}, 
+    values (#{userName,jdbcType=VARCHAR}, #{userSex,jdbcType=INTEGER}, #{userAge,jdbcType=INTEGER},
+      #{birth,jdbcType=TIMESTAMP}, #{productId,jdbcType=INTEGER}, #{fee,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR},
+      #{status,jdbcType=VARCHAR}, #{activeDate,jdbcType=TIMESTAMP}, #{onlineTime,jdbcType=INTEGER},
       #{isCbss,jdbcType=INTEGER}, #{IDCard,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}
       )
   </insert>
