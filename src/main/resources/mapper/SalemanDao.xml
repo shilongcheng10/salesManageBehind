@@ -15,12 +15,13 @@
     saleId, saleName, saleSex, saleTelNum, commision, saleProductNum, saleTotalPrice, 
     isDelete
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from saleman
     where saleId = #{saleId,jdbcType=INTEGER}
   </select>
+<<<<<<< HEAD
     <select id="getAllSaleman" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
@@ -28,11 +29,14 @@
         where isDelete=0
     </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+=======
+  <delete id="deleteByPrimaryKey" parameterType="int">
+>>>>>>> cc7aa67766e45f006e23dfbd46043753ea132281
     delete from saleman
     where saleId = #{saleId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Saleman">
-    <selectKey keyProperty="saleId" order="AFTER" resultType="java.lang.Integer">
+    <selectKey keyProperty="saleId" order="AFTER" resultType="int">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into saleman (saleName, saleSex, saleTelNum, 
@@ -43,7 +47,7 @@
       #{isDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Saleman">
-    <selectKey keyProperty="saleId" order="AFTER" resultType="java.lang.Integer">
+    <selectKey keyProperty="saleId" order="AFTER" resultType="int">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into saleman
