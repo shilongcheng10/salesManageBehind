@@ -1,3 +1,4 @@
+
 package com.unicom.salesmanagebehind.dao;
 
 import com.unicom.salesmanagebehind.model.Manager;
@@ -11,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface ManagerDao {
 
-//    @Select("select * from manager")
+    //    @Select("select * from manager")
     List<Manager> getList();
 
     int deleteByPrimaryKey(int managerId);
@@ -19,10 +20,4 @@ public interface ManagerDao {
     int insert(Manager record);
 
     int insertSelective(Manager record);
-
-    Manager selectByPrimaryKey(int managerId);
-
-    int updateByPrimaryKeySelective(Manager record);
-
-    int updateByPrimaryKey(Manager record);
 }

@@ -9,7 +9,7 @@ public interface ManagerService {
 
     List<Manager> getList();
 
-    int add();
+    int add(Manager manager);
 
 
 }

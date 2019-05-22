@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.unicom.salesmanagebehind.dao.UserDao">
   <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.User">
-    <id column="userId" jdbcType="INT" property="userId" />
+    <id column="userId" jdbcType="INTEGER" property="userId" />
     <result column="userName" jdbcType="VARCHAR" property="userName" />
-    <result column="userSex" jdbcType="INT" property="userSex" />
-    <result column="userAge" jdbcType="INT" property="userAge" />
+    <result column="userSex" jdbcType="INTEGER" property="userSex" />
+    <result column="userAge" jdbcType="INTEGER" property="userAge" />
     <result column="birth" jdbcType="DATE" property="birth" />
-    <result column="productId" jdbcType="INT" property="productId" />
-    <result column="fee" jdbcType="INT" property="fee" />
+    <result column="productId" jdbcType="INTEGER" property="productId" />
+    <result column="fee" jdbcType="INTEGER" property="fee" />
     <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="status" jdbcType="VARCHAR" property="status" />
-    <result column="activeDate" jdbcType="DATETIME" property="activeDate" />
-    <result column="onlineTime" jdbcType="INT" property="onlineTime" />
-    <result column="isCbss" jdbcType="INT" property="isCbss" />
+    <result column="activeDate" jdbcType="TIMESTAMP" property="activeDate" />
+    <result column="onlineTime" jdbcType="INTEGER" property="onlineTime" />
+    <result column="isCbss" jdbcType="INTEGER" property="isCbss" />
     <result column="IDCard" jdbcType="VARCHAR" property="IDCard" />
     <result column="cardType" jdbcType="VARCHAR" property="cardType" />
   </resultMap>
@@ -21,18 +21,18 @@
     userId, userName, userSex, userAge, birth, productId, fee, tel, status, activeDate, 
     onlineTime, isCbss, IDCard, cardType
   </sql>
-  <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
-    where userId = #{userId,jdbcType=INT}
+    where userId = #{userId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="int">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
-    where userId = #{userId,jdbcType=INT}
+    where userId = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.User">
-    <selectKey keyProperty="userId" order="AFTER" resultType="int">
+    <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into user (userName, userSex, userAge, 
@@ -40,14 +40,14 @@
       status, activeDate, onlineTime, 
       isCbss, IDCard, cardType
       )
-    values (#{userName,jdbcType=VARCHAR}, #{userSex,jdbcType=INT}, #{userAge,jdbcType=INT}, 
-      #{birth,jdbcType=DATE}, #{productId,jdbcType=INT}, #{fee,jdbcType=INT}, #{tel,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{activeDate,jdbcType=DATETIME}, #{onlineTime,jdbcType=INT}, 
-      #{isCbss,jdbcType=INT}, #{IDCard,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}
+    values (#{userName,jdbcType=VARCHAR}, #{userSex,jdbcType=INTEGER}, #{userAge,jdbcType=INTEGER},
+      #{birth,jdbcType=DATE}, #{productId,jdbcType=INTEGER}, #{fee,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR},
+      #{status,jdbcType=VARCHAR}, #{activeDate,jdbcType=TIMESTAMP}, #{onlineTime,jdbcType=INTEGER},
+      #{isCbss,jdbcType=INTEGER}, #{IDCard,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.User">
-    <selectKey keyProperty="userId" order="AFTER" resultType="int">
+    <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into user
@@ -84,13 +84,13 @@
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      #{userSex,jdbcType=INT},
-      #{userAge,jdbcType=INT},
+      #{userSex,jdbcType=INTEGER},
+      #{userAge,jdbcType=INTEGER},
       <if test="birth != null">
         #{birth,jdbcType=DATE},
       </if>
-      #{productId,jdbcType=INT},
-      #{fee,jdbcType=INT},
+      #{productId,jdbcType=INTEGER},
+      #{fee,jdbcType=INTEGER},
       <if test="tel != null">
         #{tel,jdbcType=VARCHAR},
       </if>
@@ -98,10 +98,10 @@
         #{status,jdbcType=VARCHAR},
       </if>
       <if test="activeDate != null">
-        #{activeDate,jdbcType=DATETIME},
+        #{activeDate,jdbcType=TIMESTAMP},
       </if>
-      #{onlineTime,jdbcType=INT},
-      #{isCbss,jdbcType=INT},
+      #{onlineTime,jdbcType=INTEGER},
+      #{isCbss,jdbcType=INTEGER},
       <if test="IDCard != null">
         #{IDCard,jdbcType=VARCHAR},
       </if>
@@ -117,19 +117,19 @@
         userName = #{userName,jdbcType=VARCHAR},
       </if>
       <if test="userSex != null">
-        userSex = #{userSex,jdbcType=INT},
+        userSex = #{userSex,jdbcType=INTEGER},
       </if>
       <if test="userAge != null">
-        userAge = #{userAge,jdbcType=INT},
+        userAge = #{userAge,jdbcType=INTEGER},
       </if>
       <if test="birth != null">
         birth = #{birth,jdbcType=DATE},
       </if>
       <if test="productId != null">
-        productId = #{productId,jdbcType=INT},
+        productId = #{productId,jdbcType=INTEGER},
       </if>
       <if test="fee != null">
-        fee = #{fee,jdbcType=INT},
+        fee = #{fee,jdbcType=INTEGER},
       </if>
       <if test="tel != null">
         tel = #{tel,jdbcType=VARCHAR},
@@ -138,13 +138,13 @@
         status = #{status,jdbcType=VARCHAR},
       </if>
       <if test="activeDate != null">
-        activeDate = #{activeDate,jdbcType=DATETIME},
+        activeDate = #{activeDate,jdbcType=TIMESTAMP},
       </if>
       <if test="onlineTime != null">
-        onlineTime = #{onlineTime,jdbcType=INT},
+        onlineTime = #{onlineTime,jdbcType=INTEGER},
       </if>
       <if test="isCbss != null">
-        isCbss = #{isCbss,jdbcType=INT},
+        isCbss = #{isCbss,jdbcType=INTEGER},
       </if>
       <if test="IDCard != null">
         IDCard = #{IDCard,jdbcType=VARCHAR},
@@ -153,23 +153,23 @@
         cardType = #{cardType,jdbcType=VARCHAR},
       </if>
     </set>
-    where userId = #{userId,jdbcType=INT}
+    where userId = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.unicom.salesmanagebehind.model.User">
     update user
     set userName = #{userName,jdbcType=VARCHAR},
-      userSex = #{userSex,jdbcType=INT},
-      userAge = #{userAge,jdbcType=INT},
+      userSex = #{userSex,jdbcType=INTEGER},
+      userAge = #{userAge,jdbcType=INTEGER},
       birth = #{birth,jdbcType=DATE},
-      productId = #{productId,jdbcType=INT},
-      fee = #{fee,jdbcType=INT},
+      productId = #{productId,jdbcType=INTEGER},
+      fee = #{fee,jdbcType=INTEGER},
       tel = #{tel,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
-      activeDate = #{activeDate,jdbcType=DATETIME},
-      onlineTime = #{onlineTime,jdbcType=INT},
-      isCbss = #{isCbss,jdbcType=INT},
+      activeDate = #{activeDate,jdbcType=TIMESTAMP},
+      onlineTime = #{onlineTime,jdbcType=INTEGER},
+      isCbss = #{isCbss,jdbcType=INTEGER},
       IDCard = #{IDCard,jdbcType=VARCHAR},
       cardType = #{cardType,jdbcType=VARCHAR}
-    where userId = #{userId,jdbcType=INT}
+    where userId = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

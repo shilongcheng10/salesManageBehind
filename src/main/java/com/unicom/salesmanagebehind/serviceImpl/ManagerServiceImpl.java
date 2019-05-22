@@ -18,6 +18,11 @@ public class ManagerServiceImpl implements ManagerService {
         return managerDao.getList();
     }
 
+    @Override
+    public int add(Manager manager) {
+        return 0;
+    }
+
     public int add() {
         return 0;
     }
