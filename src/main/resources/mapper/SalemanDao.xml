@@ -21,6 +21,12 @@
     from saleman
     where saleId = #{saleId,jdbcType=INTEGER}
   </select>
+    <select id="getAllSaleman" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from saleman
+        where isDelete=0
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from saleman
     where saleId = #{saleId,jdbcType=INTEGER}
