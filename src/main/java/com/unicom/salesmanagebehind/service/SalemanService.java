@@ -10,5 +10,7 @@ public interface SalemanService {
 
     int deleteByPrimaryKey(int saleId);
 
+    int insert(Saleman record);
+
 }
 

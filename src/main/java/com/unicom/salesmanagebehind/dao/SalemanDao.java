@@ -11,18 +11,11 @@ import java.util.List;
 @Repository
 @Mapper
 public interface SalemanDao {
-    //获取全部销售人员数据
-//    @Select("select * from saleman")
-//    @Results({
-//            @Result(column = "newstypeid",
-//                    property = "newsType",
-//                    one = @One(select = "com.unicom.news.dao.NewsTypeDao.getNewsTypeById",
-//                            fetchType = FetchType.EAGER)
-//            )
-//    })
+
     List<Saleman> getAllSaleman();
 
     int deleteByPrimaryKey(int saleId);
+
     int insert(Saleman record);
 
     int insertSelective(Saleman record);

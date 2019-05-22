@@ -19,4 +19,9 @@ public class SalemanServiceImpl implements SalemanService {
         return salemanDao.deleteByPrimaryKey(saleId);
     }
 
+    public int insert(Saleman record){
+        return salemanDao.insert(record);
+
+    }
+
 }
