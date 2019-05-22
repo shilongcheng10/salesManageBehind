@@ -12,7 +12,7 @@
     saleId, salemanId, productId, date, address
   </sql>
   <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from sales
     where saleId = #{saleId,jdbcType=INT}
@@ -25,9 +25,9 @@
     <selectKey keyProperty="saleId" order="AFTER" resultType="int">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sales (salemanId, productId, date, 
+    insert into sales (salemanId, productId, date,
       address)
-    values (#{salemanId,jdbcType=INT}, #{productId,jdbcType=INT}, #{date,jdbcType=DATETIME}, 
+    values (#{salemanId,jdbcType=INT}, #{productId,jdbcType=INT}, #{date,jdbcType=DATETIME},
       #{address,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Sales">
@@ -82,4 +82,6 @@
       address = #{address,jdbcType=VARCHAR}
     where saleId = #{saleId,jdbcType=INT}
   </update>
+
+
 </mapper>
