@@ -2,6 +2,7 @@ package com.unicom.salesmanagebehind.model;
 
 import java.util.Date;
 
+
 public class Product {
     private int productId;
 

@@ -15,4 +15,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
                 .maxAge(3600)
                 .allowCredentials(true);
     }
+
+
 }

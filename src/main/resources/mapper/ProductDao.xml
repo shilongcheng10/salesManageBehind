@@ -16,34 +16,39 @@
     <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
-    productId, productName, productFee, recommend, description, isFirstPush, startTime, 
+    productId, productName, productFee, recommend, description, isFirstPush, startTime,
     endTime, updateUserId, updateTime, imgUrl, isDelete
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+  <select id="getList" resultMap="BaseResultMap">
+        select * from product
+        where
+            isDelete=0
+  </select>
+  <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from product
     where productId = #{productId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="int">
     delete from product
     where productId = #{productId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Product">
-    <selectKey keyProperty="productId" order="AFTER" resultType="java.lang.Integer">
+    <selectKey keyProperty="productId" order="AFTER" resultType="int">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into product (productName, productFee, recommend, 
-      description, isFirstPush, startTime, 
-      endTime, updateUserId, updateTime, 
-      imgUrl, isDelete)
+    insert into product (productName, productFee, recommend,
+      description, isFirstPush, startTime,
+      endTime, updateUserId, updateTime,
+      imgUrl)
     values (#{productName,jdbcType=VARCHAR}, #{productFee,jdbcType=INTEGER}, #{recommend,jdbcType=VARCHAR},
       #{description,jdbcType=VARCHAR}, #{isFirstPush,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP},
       #{endTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP},
-      #{imgUrl,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER})
+      #{imgUrl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Product">
-    <selectKey keyProperty="productId" order="AFTER" resultType="java.lang.Integer">
+    <selectKey keyProperty="productId" order="AFTER" resultType="int">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into product
@@ -66,13 +71,10 @@
         endTime,
       </if>
       updateUserId,
-      <if test="updateTime != null">
         updateTime,
-      </if>
       <if test="imgUrl != null">
         imgUrl,
       </if>
-      isDelete,
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="productName != null">
@@ -85,7 +87,7 @@
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
-      #{isFirstPush,jdbcType=INTEGER},
+      0,
       <if test="startTime != null">
         #{startTime,jdbcType=TIMESTAMP},
       </if>
@@ -93,13 +95,10 @@
         #{endTime,jdbcType=TIMESTAMP},
       </if>
       #{updateUserId,jdbcType=INTEGER},
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+      sysdate(),
       <if test="imgUrl != null">
         #{imgUrl,jdbcType=VARCHAR},
       </if>
-      #{isDelete,jdbcType=INTEGER},
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.unicom.salesmanagebehind.model.Product">
