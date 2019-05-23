@@ -9,11 +9,12 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="managerTel" jdbcType="VARCHAR" property="managerTel" />
     <result column="managerEmail" jdbcType="VARCHAR" property="managerEmail" />
+    <result column="token" jdbcType="VARCHAR" property="token"/>
     <result column="role" jdbcType="INTEGER" property="role" />
     <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
-    managerId, managerName, loginName, managerSex, password, managerTel, managerEmail, 
+    managerId, managerName, loginName, managerSex, password, managerTel, managerEmail, token,
     role, isDelete
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -31,10 +32,10 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into manager (managerName, loginName, managerSex, 
-      password, managerTel, managerEmail, 
+      password, managerTel, managerEmail, token,
       role, isDelete)
     values (#{managerName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{managerSex,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{managerTel,jdbcType=VARCHAR}, #{managerEmail,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{managerTel,jdbcType=VARCHAR}, #{managerEmail,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR},
       #{role,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Manager">
@@ -61,6 +62,9 @@
       <if test="managerEmail != null">
         managerEmail,
       </if>
+      <if test="token != null">
+        token,
+      </if>
       role,
       isDelete,
     </trim>
@@ -82,6 +86,9 @@
       </if>
       <if test="managerEmail != null">
         #{managerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
       </if>
       #{role,jdbcType=INTEGER},
       #{isDelete,jdbcType=INTEGER},
@@ -108,6 +115,9 @@
       <if test="managerEmail != null">
         managerEmail = #{managerEmail,jdbcType=VARCHAR},
       </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
       <if test="role != null">
         role = #{role,jdbcType=INTEGER},
       </if>
@@ -125,6 +135,7 @@
       password = #{password,jdbcType=VARCHAR},
       managerTel = #{managerTel,jdbcType=VARCHAR},
       managerEmail = #{managerEmail,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
       role = #{role,jdbcType=INTEGER},
       isDelete = #{isDelete,jdbcType=INTEGER}
     where managerId = #{managerId,jdbcType=INTEGER}
