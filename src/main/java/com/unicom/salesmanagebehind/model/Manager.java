@@ -102,4 +102,19 @@ public class Manager {
     public void setIsDelete(int isDelete) {
         this.isDelete = isDelete;
     }
+
+    public Manager() {
+    }
+
+    public Manager(int managerId, String managerName, String loginName, String managerSex, String password, String managerTel, String managerEmail, int role, int isDelete) {
+        this.managerId = managerId;
+        this.managerName = managerName;
+        this.loginName = loginName;
+        this.managerSex = managerSex;
+        this.password = password;
+        this.managerTel = managerTel;
+        this.managerEmail = managerEmail;
+        this.role = role;
+        this.isDelete = isDelete;
+    }
 }
