@@ -125,7 +125,7 @@ public class Product {
         this.isDelete = isDelete;
     }
 
-    public Product(int productId, String productName, int productFee, String recommend, String description, int isFirstPush, Date startTime, Date endTime, int updateUserId, Date updateTime, String imgUrl, int isDelete) {
+    public Product(int productId, String productName, int productFee, String recommend, String description, int isFirstPush, Date startTime, Date endTime, String updateUser, Date updateTime, String imgUrl, int isDelete) {
         this.productId = productId;
         this.productName = productName;
         this.productFee = productFee;
