@@ -20,7 +20,7 @@ public class Product {
 
     private Date endTime;
 
-    private int updateUserId;
+    private String updateUser;
 
     private Date updateTime;
 
@@ -92,12 +92,13 @@ public class Product {
         this.endTime = endTime;
     }
 
-    public int getUpdateUserId() {
-        return updateUserId;
+
+    public String getUpdateUser() {
+        return updateUser;
     }
 
-    public void setUpdateUserId(int updateUserId) {
-        this.updateUserId = updateUserId;
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
     }
 
     public Date getUpdateTime() {

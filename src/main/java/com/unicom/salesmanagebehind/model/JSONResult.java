@@ -6,9 +6,7 @@ public class JSONResult {
 
     class DataObject{
         private int total;
-        private List notices;
-        private String message;
-
+        private List items;
 
         public int getTotal() {
             return total;
@@ -18,33 +16,21 @@ public class JSONResult {
             this.total = total;
         }
 
-        public List getNotices() {
-            return notices;
+        public List getItems() {
+            return items;
         }
 
-        public void setNotices(List notices) {
-            this.notices = notices;
+        public void setItems(List items) {
+            this.items = items;
         }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
 
         public DataObject() {
         }
 
-        public DataObject(int total, List items,String message) {
+        public DataObject(int total, List items) {
             this.total = total;
-            this.notices = items;
-            this.message=message;
+            this.items = items;
         }
-
-
     }
 
     private int code;
@@ -82,18 +68,14 @@ public class JSONResult {
         if(datalist instanceof List){
             DataObject data=new DataObject();
             data.setTotal(((List)datalist).size());
-            data.setNotices((List)datalist);
-
+            data.setItems((List)datalist);
 
             result.setData(data);
         }else{
             //给来的数据不是list
-//            result.setData(datalist);
-            DataObject data=new DataObject();
-            data.setMessage((String)datalist);
-
+            result.setData(datalist);
         }
-        System.out.println(result);
+
         return result;
     }
 }
