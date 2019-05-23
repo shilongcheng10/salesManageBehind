@@ -32,4 +32,9 @@ public class ManagerServiceImpl implements ManagerService {
     public int deleteAll(List list){
         return  managerDao.deleteAll(list);
     }
+
+    @Override
+    public String getLoginNameByToken(String token) {
+        return managerDao.getLoginNameByToken(token);
+    }
 }

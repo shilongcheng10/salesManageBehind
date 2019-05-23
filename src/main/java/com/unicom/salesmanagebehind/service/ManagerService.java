@@ -17,5 +17,6 @@ public interface ManagerService {
 
     int deleteAll(List list);
 
+    String getLoginNameByToken(String token);
 
 }

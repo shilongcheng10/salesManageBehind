@@ -29,4 +29,6 @@ public interface ManagerDao {
     int insert(Manager record);
 
     int insertSelective(Manager record);
+
+    String getLoginNameByToken(String token);
 }

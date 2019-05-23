@@ -221,4 +221,11 @@
     </foreach>
   </update>
 
+  <select id="getLoginNameByToken" parameterType="java.lang.String" resultType="java.lang.String">
+    select loginName from
+        manager
+    where
+        token=#{token,jdbcType=VARCHAR}
+  </select>
+
 </mapper>
