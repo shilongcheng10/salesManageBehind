@@ -13,17 +13,23 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Autowired
     private ManagerDao managerDao;
-
-    public List<Manager> getList() {
-        return managerDao.getList();
+    public List<Manager> getList(Integer managerId,String managerName,String loginName,String managerTel) {
+        return managerDao.getList(managerId,managerName,loginName,managerTel);
     }
 
-    @Override
     public int add(Manager manager) {
-        return 0;
+        return managerDao.addManager(manager);
     }
 
-    public int add() {
-        return 0;
+    public int update(Manager manager){
+        return managerDao.update(manager);
+    }
+
+    public int delete(Integer id){
+        return managerDao.delete(id);
+    }
+
+    public int deleteAll(List list){
+        return  managerDao.deleteAll(list);
     }
 }
