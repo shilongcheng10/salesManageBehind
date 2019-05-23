@@ -4,20 +4,18 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.unicom.salesmanagebehind.model.Product;
 import com.unicom.salesmanagebehind.model.ResultPojo;
+import com.unicom.salesmanagebehind.service.ManagerService;
 import com.unicom.salesmanagebehind.service.ProductService;
 import com.unicom.salesmanagebehind.utils.DateUtil;
 import com.unicom.salesmanagebehind.utils.FileUtils;
 import com.unicom.salesmanagebehind.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.ClassUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
-import java.util.UUID;
 import java.util.List;
 /**
  * @program: saleManage
@@ -30,6 +28,12 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Value("${app.ip}")
+    private String ipaddress;
+    @Autowired
+    private ManagerService managerService;
+
+
 
     @RequestMapping(value="add",method = RequestMethod.POST)
     public ResultPojo addProduct(@RequestParam String params){
@@ -45,19 +49,26 @@ public class ProductController {
         if (json.get("imgUrl")!=null){
             product.setImgUrl(json.get("imgUrl").toString());
 
-        }else {
-            product.setImgUrl("");
         }
-        product.setUpdateUser(json.get("updateUser").toString());
+//        else {
+//            product.setImgUrl("");
+//        }
+        String token=json.get("updateUser").toString();
+        String updateUser=managerService.getLoginNameByToken(token);
+        if (updateUser!=null&&!updateUser.isEmpty()){
+            product.setUpdateUser(updateUser);
+        }
         product.setRecommend(json.get("recommend").toString());
         if (productService.insertItem(product)!=1){
             return ResultUtils.error(-1,"插入失败");
         }
         System.out.println(product);
-        product.setImgUrl("http://localhost:8080"+json.get("imgUrl").toString());
+        product.setImgUrl(ipaddress+json.get("imgUrl").toString());
         product.setUpdateTime(new Date());
         return ResultUtils.success("插入成功",product);
     }
+
+
     @RequestMapping(value = "upload")
     public ResultPojo uploadImg(MultipartFile picture, HttpServletRequest request){
         return FileUtils.upload(picture);
@@ -109,10 +120,12 @@ public class ProductController {
             return ResultUtils.error(-1,"没有套餐列表相关记录");
         }
         for (Product item:list) {
-            item.setImgUrl("http://localhost:8080"+item.getImgUrl());
+            item.setImgUrl(ipaddress+item.getImgUrl());
         }
         return ResultUtils.success("获得列表成功",list);
     }
+
+
     @RequestMapping(value="update",method = RequestMethod.POST)
     public ResultPojo editProduct(@RequestParam String params){
         JSONObject json=JSON.parseObject(params);
@@ -127,14 +140,24 @@ public class ProductController {
         product.setRecommend(json.get("recommend").toString());
         String imgUrl = json.get("imgUrl").toString();
         if (!imgUrl.contains("http")){
+            String filePath=productService.getImgSrcById((int)json.get("productId"));
+            ResultPojo resultPojo=FileUtils.delete(filePath);
+            if (resultPojo.getCode()!=0){
+                return ResultUtils.error(-2,"图片更新失败");
+            }
             product.setImgUrl(imgUrl);
-        }else{
-
         }
-        product.setUpdateUser(json.get("updateUser").toString());
+        String token=json.get("updateUser").toString();
+        String updateUser=managerService.getLoginNameByToken(token).trim();
+        if (updateUser!=null&&!updateUser.isEmpty()){
+            product.setUpdateUser(updateUser);
+        }else{
+            return ResultUtils.error(-3,"获取当前用户信息失败");
+        }
         try{
             productService.update(product);
-                return ResultUtils.success("更新成功");
+
+            return ResultUtils.success("更新成功",ipaddress+imgUrl);
         }catch (Exception e){
             e.printStackTrace();
             return ResultUtils.error(-1,"更新失败");

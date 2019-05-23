@@ -14,5 +14,5 @@ public interface ProductService {
 
     public void update(Product product);
     public Product getItemById(int id);
-    public String getImgSrc(int productId);
+    public String getImgSrcById(int productId);
 }
