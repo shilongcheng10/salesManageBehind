@@ -4,12 +4,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.unicom.salesmanagebehind.model.JSONResult;
 import com.unicom.salesmanagebehind.model.Manager;
-import com.unicom.salesmanagebehind.model.ResultPojo;
 import com.unicom.salesmanagebehind.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "manager")
@@ -21,7 +21,7 @@ public class ManagerController {
     @GetMapping(value = "/list")
     public JSONResult selectList(
             @RequestParam(value = "page",defaultValue = "1") int page,
-            @RequestParam(value = "limit",defaultValue = "2") int limit,
+            @RequestParam(value = "limit",defaultValue = "5") int limit,
             @RequestParam(name = "managerId",defaultValue ="") Integer managerId,
             @RequestParam(name = "managerName",defaultValue = "") String managerName,
             @RequestParam(name = "loginName",defaultValue = "") String loginName,
