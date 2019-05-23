@@ -16,8 +16,15 @@
     managerId, managerName, loginName, managerSex, password, managerTel, managerEmail, 
     role, isDelete
   </sql>
+
+  <select id="getList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from manager
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from manager
     where managerId = #{managerId,jdbcType=INTEGER}

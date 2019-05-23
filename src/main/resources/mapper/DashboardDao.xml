@@ -46,15 +46,15 @@
     </select>
 
     <select id="selectProduct"  resultMap="List">
-        SELECT productId,COUNT(*)
+         SELECT productId,COUNT(*) AS number
         from sales
-        Group by productId
+        Group by productId ORDER BY number DESC
     </select>
 
     <select id="selectSaleMan"  resultMap="List">
-        SELECT salemanId,COUNT(*)
+        SELECT salemanId,COUNT(*) AS number
         from sales
-        Group by salemanId
+        Group by salemanId ORDER BY number DESC
     </select>
 
 </mapper>

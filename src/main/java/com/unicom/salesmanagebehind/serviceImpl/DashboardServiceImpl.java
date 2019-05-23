@@ -28,7 +28,9 @@ public class DashboardServiceImpl implements DashboardService {
 
     //套餐统计
     public List selectProduct(){
-        return dashboardDao.selectProduct();
+        List list = dashboardDao.selectProduct();
+
+        return list;
     }
 
     //营销人员统计
