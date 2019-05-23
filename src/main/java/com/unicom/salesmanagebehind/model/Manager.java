@@ -18,6 +18,18 @@ public class Manager {
     private int role;
 
     private int isDelete;
+    private String token;
+
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+
 
     public int getManagerId() {
         return managerId;
