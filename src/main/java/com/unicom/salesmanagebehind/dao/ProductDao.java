@@ -19,4 +19,5 @@ public interface ProductDao {
 
     int updateByPrimaryKey(Product record);
     List<Product> getList();
+    String getPrdocutImgSrc(int productId);
 }

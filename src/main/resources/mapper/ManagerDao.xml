@@ -9,19 +9,14 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="managerTel" jdbcType="VARCHAR" property="managerTel" />
     <result column="managerEmail" jdbcType="VARCHAR" property="managerEmail" />
+    <result column="token" jdbcType="VARCHAR" property="token"/>
     <result column="role" jdbcType="INTEGER" property="role" />
     <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
-    managerId, managerName, loginName, managerSex, password, managerTel, managerEmail, 
-    role, isDelete
+    managerId, managerName, loginName, managerSex, password, managerTel, managerEmail, token,
+    isDelete
   </sql>
-
-  <select id="getList" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from manager
-  </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -38,11 +33,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into manager (managerName, loginName, managerSex, 
-      password, managerTel, managerEmail, 
-      role, isDelete)
-    values (#{managerName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{managerSex,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{managerTel,jdbcType=VARCHAR}, #{managerEmail,jdbcType=VARCHAR}, 
-      #{role,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER})
+      password, managerTel, managerEmail, token,
+      isDelete)
+    values (#{managerName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{managerSex,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR}, #{managerTel,jdbcType=VARCHAR}, #{managerEmail,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR},
+      #{isDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Manager">
     <selectKey keyProperty="managerId" order="AFTER" resultType="java.lang.Integer">
@@ -68,7 +63,9 @@
       <if test="managerEmail != null">
         managerEmail,
       </if>
-      role,
+      <if test="token != null">
+        token,
+      </if>
       isDelete,
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -90,7 +87,9 @@
       <if test="managerEmail != null">
         #{managerEmail,jdbcType=VARCHAR},
       </if>
-      #{role,jdbcType=INTEGER},
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
       #{isDelete,jdbcType=INTEGER},
     </trim>
   </insert>
@@ -115,8 +114,8 @@
       <if test="managerEmail != null">
         managerEmail = #{managerEmail,jdbcType=VARCHAR},
       </if>
-      <if test="role != null">
-        role = #{role,jdbcType=INTEGER},
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null">
         isDelete = #{isDelete,jdbcType=INTEGER},
@@ -132,8 +131,94 @@
       password = #{password,jdbcType=VARCHAR},
       managerTel = #{managerTel,jdbcType=VARCHAR},
       managerEmail = #{managerEmail,jdbcType=VARCHAR},
-      role = #{role,jdbcType=INTEGER},
+      token = #{token,jdbcType=VARCHAR},
       isDelete = #{isDelete,jdbcType=INTEGER}
     where managerId = #{managerId,jdbcType=INTEGER}
   </update>
+
+
+  <select id="getList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from manager
+    <where>
+      <if test="managerId != null">
+        and managerId = #{managerId}
+      </if>
+      <if test="managerName != null">
+        and managerName like '%${managerName}%'
+      </if>
+      <if test="loginName != null">
+        and loginName like '%${loginName}%'
+      </if>
+      <if test="managerTel != null">
+        and managerTel like '%${managerTel}%'
+      </if>
+      and isDelete=0
+    </where>
+  </select>
+
+  <insert id="addManager" parameterType="com.unicom.salesmanagebehind.model.Manager">
+    insert into manager
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="managerName != null">
+        managerName,
+      </if>
+      <if test="loginName != null">
+        loginName,
+      </if>
+      <if test="managerSex != null">
+        managerSex,
+      </if>
+      <if test="managerTel != null">
+        managerTel,
+      </if>
+      <if test="managerEmail != null">
+        managerEmail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="managerName != null">
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerSex != null">
+        #{managerSex,jdbcType=VARCHAR},
+      </if>
+      <if test="managerTel != null">
+        #{managerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="managerEmail != null">
+        #{managerEmail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.unicom.salesmanagebehind.model.Manager">
+    update manager
+    set managerName = #{managerName,jdbcType=VARCHAR},
+      loginName = #{loginName,jdbcType=VARCHAR},
+      managerSex = #{managerSex,jdbcType=VARCHAR},
+      managerTel = #{managerTel,jdbcType=VARCHAR},
+      managerEmail = #{managerEmail,jdbcType=VARCHAR}
+    where managerId = #{managerId,jdbcType=INTEGER}
+  </update>
+
+  <update id="delete" parameterType="java.lang.Integer">
+    update manager
+    set isDelete=1
+    where managerId = #{managerId,jdbcType=INTEGER}
+  </update>
+
+  <update id="deleteAll" parameterType="java.util.List">
+    update manager
+    set isDelete=1
+    where managerId IN
+    <foreach collection="list" item="managerId" open="(" close=")" separator=",">
+      #{managerId}
+    </foreach>
+  </update>
+
 </mapper>

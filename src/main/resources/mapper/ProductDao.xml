@@ -10,45 +10,53 @@
     <result column="isFirstPush" jdbcType="INTEGER" property="isFirstPush" />
     <result column="startTime" jdbcType="TIMESTAMP" property="startTime" />
     <result column="endTime" jdbcType="TIMESTAMP" property="endTime" />
-    <result column="updateUserId" jdbcType="INTEGER" property="updateUserId" />
+    <result column="updateUser" jdbcType="VARCHAR" property="updateUser" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="imgUrl" jdbcType="VARCHAR" property="imgUrl" />
     <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
     productId, productName, productFee, recommend, description, isFirstPush, startTime,
-    endTime, updateUserId, updateTime, imgUrl, isDelete
+    endTime, updateUser, updateTime, imgUrl, isDelete
   </sql>
   <select id="getList" resultMap="BaseResultMap">
         select * from product
         where
             isDelete=0
   </select>
+
+  <select id="getPrdocutImgSrc" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select imgUrl from prodcut
+        where
+              productId = #{productId,jdbcType=INTEGER}
+          and isDelete=0
+  </select>
   <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from product
     where productId = #{productId,jdbcType=INTEGER}
+    and isDelete=0
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="int">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from product
     where productId = #{productId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Product">
-    <selectKey keyProperty="productId" order="AFTER" resultType="int">
+    <selectKey keyProperty="productId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into product (productName, productFee, recommend,
       description, isFirstPush, startTime,
-      endTime, updateUserId, updateTime,
+      endTime, updateUser, updateTime,
       imgUrl)
     values (#{productName,jdbcType=VARCHAR}, #{productFee,jdbcType=INTEGER}, #{recommend,jdbcType=VARCHAR},
       #{description,jdbcType=VARCHAR}, #{isFirstPush,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP},
-      #{endTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP},
+      #{endTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
       #{imgUrl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Product">
-    <selectKey keyProperty="productId" order="AFTER" resultType="int">
+    <selectKey keyProperty="productId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into product
@@ -70,7 +78,7 @@
       <if test="endTime != null">
         endTime,
       </if>
-      updateUserId,
+      updateUser,
         updateTime,
       <if test="imgUrl != null">
         imgUrl,
@@ -94,7 +102,7 @@
       <if test="endTime != null">
         #{endTime,jdbcType=TIMESTAMP},
       </if>
-      #{updateUserId,jdbcType=INTEGER},
+      #{updateUser,jdbcType=VARCHAR},
       sysdate(),
       <if test="imgUrl != null">
         #{imgUrl,jdbcType=VARCHAR},
@@ -125,8 +133,8 @@
       <if test="endTime != null">
         endTime = #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateUserId != null">
-        updateUserId = #{updateUserId,jdbcType=INTEGER},
+      <if test="updateUser != null">
+        updateUserId = #{updateUser,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         updateTime = #{updateTime,jdbcType=TIMESTAMP},
@@ -149,7 +157,7 @@
       isFirstPush = #{isFirstPush,jdbcType=INTEGER},
       startTime = #{startTime,jdbcType=TIMESTAMP},
       endTime = #{endTime,jdbcType=TIMESTAMP},
-      updateUserId = #{updateUserId,jdbcType=INTEGER},
+      updateUser = #{updateUser,jdbcType=VARCHAR},
       updateTime = #{updateTime,jdbcType=TIMESTAMP},
       imgUrl = #{imgUrl,jdbcType=VARCHAR},
       isDelete = #{isDelete,jdbcType=INTEGER}
