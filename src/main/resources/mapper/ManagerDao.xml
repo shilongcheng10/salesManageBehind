@@ -10,7 +10,6 @@
     <result column="managerTel" jdbcType="VARCHAR" property="managerTel" />
     <result column="managerEmail" jdbcType="VARCHAR" property="managerEmail" />
     <result column="token" jdbcType="VARCHAR" property="token"/>
-    <result column="role" jdbcType="INTEGER" property="role" />
     <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -32,7 +31,7 @@
     <selectKey keyProperty="managerId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into manager (managerName, loginName, managerSex, 
+    insert into manager (managerName, loginName, managerSex,
       password, managerTel, managerEmail, token,
       isDelete)
     values (#{managerName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{managerSex,jdbcType=VARCHAR},
@@ -131,8 +130,8 @@
       password = #{password,jdbcType=VARCHAR},
       managerTel = #{managerTel,jdbcType=VARCHAR},
       managerEmail = #{managerEmail,jdbcType=VARCHAR},
-      token = #{token,jdbcType=VARCHAR},
       isDelete = #{isDelete,jdbcType=INTEGER}
+      token = #{token,jdbcType=VARCHAR},
     where managerId = #{managerId,jdbcType=INTEGER}
   </update>
 
@@ -176,6 +175,9 @@
       <if test="managerEmail != null">
         managerEmail,
       </if>
+      <if test="token != null">
+        token,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="managerName != null">
@@ -192,6 +194,9 @@
       </if>
       <if test="managerEmail != null">
         #{managerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+         #{token,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
