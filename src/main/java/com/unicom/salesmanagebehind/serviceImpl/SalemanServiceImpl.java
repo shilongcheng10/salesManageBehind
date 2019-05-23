@@ -11,17 +11,61 @@ import java.util.List;
 public class SalemanServiceImpl implements SalemanService {
     @Autowired
     SalemanDao salemanDao;
-    public List<Saleman> getAllSaleman(){
-        return salemanDao.getAllSaleman();
+    /**
+     * 获取列表+查询
+     * @param id
+     * @param saleName
+     * @return
+     */
+
+    public List<Saleman> getList(Integer id,String saleName){
+        return salemanDao.getList(id,saleName);
     }
 
+    /**
+     * 根据saleId删除一条记录
+     * @param saleId
+     * @return
+     */
     public int deleteByPrimaryKey(int saleId){
         return salemanDao.deleteByPrimaryKey(saleId);
     }
 
-    public int insert(Saleman record){
-        return salemanDao.insert(record);
+    /**
+     * 添加一条记录
+     * @param saleman
+     * @return
+     */
+
+    public int insert(Saleman saleman){
+        return salemanDao.insert(saleman);
+    }
+
+//    public Saleman selectByPrimaryKey(int saleId){
+//        return salemanDao.selectByPrimaryKey(saleId);
+//    }
+
+    /**
+     * 更新一条记录
+     * @param saleman
+     * @return
+     */
+    public int updateByPrimaryKeySelective(Saleman saleman){
+        return salemanDao.updateByPrimaryKeySelective(saleman);
+    }
+
+    /**
+     * 批量删除
+     * @param list
+     * @return
+     */
+    public int batchDelete(List<Integer> list){
+        return salemanDao.batchDelete(list);
 
     }
+
+
+
+
 
 }
