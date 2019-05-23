@@ -27,5 +27,20 @@ public class ProductServiceImpl implements ProductService {
         return productDao.getList();
     }
 
+    @Override
+    public void update(Product product) {
+        productDao.updateByPrimaryKeySelective(product);
+    }
+
+    @Override
+    public Product getItemById(int id) {
+        return  productDao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public String getImgSrcById(int productId) {
+        return productDao.getPrdocutImgSrc(productId);
+    }
+
 
 }

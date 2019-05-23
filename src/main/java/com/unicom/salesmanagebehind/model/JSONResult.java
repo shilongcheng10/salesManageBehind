@@ -72,7 +72,7 @@ public class JSONResult {
 
             result.setData(data);
         }else{
-            //给来的数据不是list...
+            //给来的数据不是list
             result.setData(datalist);
         }
 
