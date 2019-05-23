@@ -134,7 +134,7 @@ public class Product {
         this.isFirstPush = isFirstPush;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.updateUserId = updateUserId;
+        this.updateUser = updateUser;
         this.updateTime = updateTime;
         this.imgUrl = imgUrl;
         this.isDelete = isDelete;
@@ -154,7 +154,7 @@ public class Product {
                 ", isFirstPush=" + isFirstPush +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
-                ", updateUserId=" + updateUserId +
+                ", updateUser=" + updateUser +
                 ", updateTime=" + updateTime +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", isDelete=" + isDelete +
