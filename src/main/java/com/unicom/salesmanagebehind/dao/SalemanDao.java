@@ -1,21 +1,48 @@
 package com.unicom.salesmanagebehind.dao;
 
 import com.unicom.salesmanagebehind.model.Saleman;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface SalemanDao {
 
-    List<Saleman> getAllSaleman();
+@Repository
+@Mapper
+public interface SalemanDao {
+    //获取列表
+    List<Saleman> getList(
+            @Param("saleId") Integer id,
+            @Param("saleName") String saleName
+    );
+    //删除一条记录
     int deleteByPrimaryKey(int saleId);
 
-    int insert(Saleman record);
+    //获取数据
+    @Select("SELECT a.*," +
+            "(select count(*) from sales b where b.salemanId=a.saleId) as saleProductNum," +
+            "(select sum(d.productFee) from sales b,product d where b.productId=d.productId GROUP BY salemanId HAVING b.salemanId=a.saleId) as saleTotalPrice" +
+            "FROM saleman a")
+    List<Saleman> getLists();
 
-    int insertSelective(Saleman record);
+    //新增一条记录
+    int insert(Saleman saleman);
 
-    Saleman selectByPrimaryKey(int saleId);
-
+    //更新一条记录
     int updateByPrimaryKeySelective(Saleman record);
 
-    int updateByPrimaryKey(Saleman record);
+    //批量删除
+
+    int batchDelete(List<Integer> list);
+
+//    int insertSelective(Saleman record);
+
+
+//    Saleman selectByPrimaryKey(int saleId);
+
+
+
+//    int updateByPrimaryKey(Saleman record);
 }

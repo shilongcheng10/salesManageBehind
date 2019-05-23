@@ -15,63 +15,83 @@
     saleId, saleName, saleSex, saleTelNum, commision, saleProductNum, saleTotalPrice, 
     isDelete
   </sql>
-  <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from saleman
-    where saleId = #{saleId,jdbcType=INTEGER}
+  <!--获取列表-->
+  <select id="getList" resultMap="BaseResultMap">
+
+
+    SELECT a.*,
+    (select count(*) from sales b where b.salemanId=a.saleId) as saleProductNum,
+    (select sum(d.productFee) from sales b,product d where b.productId=d.productId GROUP BY salemanId HAVING b.salemanId=a.saleId) as saleTotalPrice
+    FROM saleman a
+    <where>
+      <if test="saleId !=null">
+        saleId=#{saleId}
+      </if>
+      <if test="saleName !=null">
+        and saleName like '%${saleName}%'
+      </if>
+      and isDelete=0
+    </where>
+
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="int">
+<!---->
+  <!--<select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from saleman-->
+    <!--where saleId = #{saleId,jdbcType=INTEGER}-->
+  <!--</select>-->
+<!--删除一条记录-->
+  <update id="deleteByPrimaryKey" parameterType="int">
+    update saleman set isDelete=1 where saleId=#{saleId,jdbcType=INTEGER}
+  </update>
+
+  <!--<delete id="deleteByPrimaryKey" parameterType="int">
     delete from saleman
     where saleId = #{saleId,jdbcType=INTEGER}
-  </delete>
+  </delete>-->
+  <!--增加一条记录-->
   <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Saleman">
-    <selectKey keyProperty="saleId" order="AFTER" resultType="int">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into saleman (saleName, saleSex, saleTelNum, 
-      commision, saleProductNum, saleTotalPrice, 
-      isDelete)
-    values (#{saleName,jdbcType=VARCHAR}, #{saleSex,jdbcType=INTEGER}, #{saleTelNum,jdbcType=VARCHAR},
-      #{commision,jdbcType=VARCHAR}, #{saleProductNum,jdbcType=INTEGER}, #{saleTotalPrice,jdbcType=INTEGER},
-      #{isDelete,jdbcType=INTEGER})
+    insert into saleman (saleName, saleSex, saleTelNum, commision, saleProductNum, saleTotalPrice)
+    values (#{saleName,jdbcType=VARCHAR}, #{saleSex,jdbcType=INTEGER}, #{saleTelNum,jdbcType=VARCHAR},#{commision,jdbcType=VARCHAR}, #{saleProductNum,jdbcType=INTEGER}, #{saleTotalPrice,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Saleman">
-    <selectKey keyProperty="saleId" order="AFTER" resultType="int">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into saleman
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="saleName != null">
-        saleName,
-      </if>
-      saleSex,
-      <if test="saleTelNum != null">
-        saleTelNum,
-      </if>
-      <if test="commision != null">
-        commision,
-      </if>
-      saleProductNum,
-      saleTotalPrice,
-      isDelete,
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="saleName != null">
-        #{saleName,jdbcType=VARCHAR},
-      </if>
-      #{saleSex,jdbcType=INTEGER},
-      <if test="saleTelNum != null">
-        #{saleTelNum,jdbcType=VARCHAR},
-      </if>
-      <if test="commision != null">
-        #{commision,jdbcType=VARCHAR},
-      </if>
-      #{saleProductNum,jdbcType=INTEGER},
-      #{saleTotalPrice,jdbcType=INTEGER},
-      #{isDelete,jdbcType=INTEGER},
-    </trim>
-  </insert>
+  <!--<insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Saleman">-->
+    <!--<selectKey keyProperty="saleId" order="AFTER" resultType="int">-->
+      <!--SELECT LAST_INSERT_ID()-->
+    <!--</selectKey>-->
+    <!--insert into saleman-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
+      <!--<if test="saleName != null">-->
+        <!--saleName,-->
+      <!--</if>-->
+      <!--saleSex,-->
+      <!--<if test="saleTelNum != null">-->
+        <!--saleTelNum,-->
+      <!--</if>-->
+      <!--<if test="commision != null">-->
+        <!--commision,-->
+      <!--</if>-->
+      <!--saleProductNum,-->
+      <!--saleTotalPrice,-->
+      <!--isDelete,-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
+      <!--<if test="saleName != null">-->
+        <!--#{saleName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--#{saleSex,jdbcType=INTEGER},-->
+      <!--<if test="saleTelNum != null">-->
+        <!--#{saleTelNum,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="commision != null">-->
+        <!--#{commision,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--#{saleProductNum,jdbcType=INTEGER},-->
+      <!--#{saleTotalPrice,jdbcType=INTEGER},-->
+      <!--#{isDelete,jdbcType=INTEGER},-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--更新一条记录-->
   <update id="updateByPrimaryKeySelective" parameterType="com.unicom.salesmanagebehind.model.Saleman">
     update saleman
     <set>
@@ -99,15 +119,24 @@
     </set>
     where saleId = #{saleId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.unicom.salesmanagebehind.model.Saleman">
-    update saleman
-    set saleName = #{saleName,jdbcType=VARCHAR},
-      saleSex = #{saleSex,jdbcType=INTEGER},
-      saleTelNum = #{saleTelNum,jdbcType=VARCHAR},
-      commision = #{commision,jdbcType=VARCHAR},
-      saleProductNum = #{saleProductNum,jdbcType=INTEGER},
-      saleTotalPrice = #{saleTotalPrice,jdbcType=INTEGER},
-      isDelete = #{isDelete,jdbcType=INTEGER}
-    where saleId = #{saleId,jdbcType=INTEGER}
+
+  <!--批量删除-->
+  <update id="batchDelete" parameterType="list">
+
+    update saleman set isDelete =1 where saleId in
+    <foreach  item="saleId" collection="list" open="("  separator="," close=")">
+      #{saleId}
+    </foreach>
   </update>
+  <!--<update id="updateByPrimaryKey" parameterType="com.unicom.salesmanagebehind.model.Saleman">-->
+    <!--update saleman-->
+    <!--set saleName = #{saleName,jdbcType=VARCHAR},-->
+      <!--saleSex = #{saleSex,jdbcType=INTEGER},-->
+      <!--saleTelNum = #{saleTelNum,jdbcType=VARCHAR},-->
+      <!--commision = #{commision,jdbcType=VARCHAR},-->
+      <!--saleProductNum = #{saleProductNum,jdbcType=INTEGER},-->
+      <!--saleTotalPrice = #{saleTotalPrice,jdbcType=INTEGER},-->
+      <!--isDelete = #{isDelete,jdbcType=INTEGER}-->
+    <!--where saleId = #{saleId,jdbcType=INTEGER}-->
+  <!--</update>-->
 </mapper>
