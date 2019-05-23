@@ -84,6 +84,7 @@ public class JSONResult {
             data.setTotal(((List)datalist).size());
             data.setNotices((List)datalist);
 
+
             result.setData(data);
         }else{
             //给来的数据不是list
@@ -92,7 +93,7 @@ public class JSONResult {
             data.setMessage((String)datalist);
 
         }
-
+        System.out.println(result);
         return result;
     }
 }

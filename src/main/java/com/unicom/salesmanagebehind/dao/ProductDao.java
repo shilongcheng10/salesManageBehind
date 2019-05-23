@@ -1,7 +1,11 @@
 package com.unicom.salesmanagebehind.dao;
-
+import java.util.List;
 import com.unicom.salesmanagebehind.model.Product;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+@Repository
+@Mapper
 public interface ProductDao {
     int deleteByPrimaryKey(int productId);
 
@@ -14,4 +18,5 @@ public interface ProductDao {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+    List<Product> getList();
 }

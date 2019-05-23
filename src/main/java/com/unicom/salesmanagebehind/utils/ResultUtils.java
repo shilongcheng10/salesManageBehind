@@ -12,12 +12,10 @@ public class ResultUtils {
     }
 
     public static ResultPojo success(String msg) {
-
         return new ResultPojo(0, msg, null);
     }
 
     public static ResultPojo success(Object object) {
-
         return new ResultPojo(0, "成功", object);
     }
 
@@ -25,7 +23,6 @@ public class ResultUtils {
         return new ResultPojo(0, msg, object);
     }
     public static ResultPojo error(Integer code, String msg) {
-
         return new ResultPojo(code, msg, null);
     }
 

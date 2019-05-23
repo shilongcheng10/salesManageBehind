@@ -21,17 +21,7 @@
     from saleman
     where saleId = #{saleId,jdbcType=INTEGER}
   </select>
-<<<<<<< HEAD
-    <select id="getAllSaleman" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from saleman
-        where isDelete=0
-    </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-=======
   <delete id="deleteByPrimaryKey" parameterType="int">
->>>>>>> cc7aa67766e45f006e23dfbd46043753ea132281
     delete from saleman
     where saleId = #{saleId,jdbcType=INTEGER}
   </delete>
