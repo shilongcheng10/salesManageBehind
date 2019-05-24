@@ -7,12 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class MonthSalesService {
 
-    @Autowired
-    private MonthSalesDao monthSalesDao;
-    public List<MonthSale> getSales(){
-        return monthSalesDao.getSales();
-    }
+public interface MonthSalesService {
+
+
+    public List<MonthSale> getSales();
 }
