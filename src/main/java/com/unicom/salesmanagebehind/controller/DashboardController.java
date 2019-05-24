@@ -21,12 +21,15 @@ public class DashboardController {
     public JSONResult showMoney(){
 
         List<Integer> list = new ArrayList();
-        list.set(1,dashboardService.selectDay());
-        list.set(2,dashboardService.selectMonth());
-        list.set(3,dashboardService.selectYear());
+        list.add(dashboardService.selectDay());
+        list.add(dashboardService.selectMonth());
+        list.add(dashboardService.selectYear());
         return new JSONResult().ok(list);
     }
 
-
+    @GetMapping(value = "/productList")
+    public JSONResult showProduct(){
+        return new JSONResult().ok(dashboardService.selectProduct());
+    }
 
 }

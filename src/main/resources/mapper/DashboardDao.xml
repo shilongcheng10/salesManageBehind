@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.unicom.salesmanagebehind.dao.SalesDao">
+<mapper namespace="com.unicom.salesmanagebehind.dao.DashboardDao">
     <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.Sales">
-        <id column="saleId" jdbcType="INT" property="saleId" />
-        <result column="salemanId" jdbcType="INT" property="salemanId" />
-        <result column="productId" jdbcType="INT" property="productId" />
-        <result column="date" jdbcType="DATETIME" property="date" />
+        <id column="saleId" jdbcType="INTEGER" property="saleId" />
+        <result column="salemanId" jdbcType="INTEGER" property="salemanId" />
+        <result column="productId" jdbcType="INTEGER" property="productId" />
+        <result column="date" jdbcType="TIMESTAMP" property="date" />
         <result column="address" jdbcType="VARCHAR" property="address" />
 
     <association property="Product" javaType="com.unicom.salesmanagebehind.model.Product">
@@ -22,39 +22,45 @@
         <result column="imgUrl" jdbcType="VARCHAR" property="imgUrl" />
         <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
     </association>
+        <association property="SaleMan" javaType="com.unicom.salesmanagebehind.model.Saleman">
+            <id column="saleId" jdbcType="INTEGER" property="saleId" />
+            <result column="saleName" jdbcType="VARCHAR" property="saleName" />
+            <result column="saleSex" jdbcType="INTEGER" property="saleSex" />
+            <result column="saleTelNum" jdbcType="VARCHAR" property="saleTelNum" />
+            <result column="commision" jdbcType="VARCHAR" property="commision" />
+            <result column="saleProductNum" jdbcType="INTEGER" property="saleProductNum" />
+            <result column="saleTotalPrice" jdbcType="INTEGER" property="saleTotalPrice" />
+            <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
+        </association>
     </resultMap>
-    <select id="selectDay" parameterType="int" resultMap="java.lang.Integer">
-        SELECT sum(productFee)
+    <select id="selectDay" resultType="java.lang.Integer">
+        SELECT IFNULL(sum(productFee),0) AS daySales
         from product,sales
         WHERE product.productId = sales.productId
         and to_days(sales.date) = to_days(now())
     </select>
 
-    <select id="selectMonth" parameterType="int" resultMap="java.lang.Integer">
-        SELECT sum(productFee)
+    <select id="selectMonth" resultType="java.lang.Integer">
+        SELECT IFNULL(sum(productFee),0) AS monthSales
         from product,sales
         WHERE product.productId = sales.productId
         and DATE_FORMAT( sales.date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
 
     </select>
 
-    <select id="selectYear" parameterType="int" resultMap="java.lang.Integer">
-        SELECT sum(productFee)
+    <select id="selectYear" resultType="java.lang.Integer">
+        SELECT IFNULL(sum(productFee),0) AS yearSales
         from product,sales
         WHERE product.productId = sales.productId
         and YEAR(sales.date)=YEAR(NOW())
     </select>
 
-    <select id="selectProduct"  resultMap="List">
-         SELECT productId,COUNT(*) AS number
-        from sales
-        Group by productId ORDER BY number DESC
+    <select id="selectProduct"  resultType="com.unicom.salesmanagebehind.model.Product">
+         SELECT productId,COUNT(*) AS number from sales Group by productId ORDER BY number DESC
     </select>
 
-    <select id="selectSaleMan"  resultMap="List">
-        SELECT salemanId,COUNT(*) AS number
-        from sales
-        Group by salemanId ORDER BY number DESC
+    <select id="selectSaleMan"  resultType="java.util.List">
+        SELECT salemanId,COUNT(*) AS number from sales Group by salemanId ORDER BY number DESC
     </select>
 
 </mapper>
