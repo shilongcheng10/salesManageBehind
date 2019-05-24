@@ -7,30 +7,30 @@
         <result column="productId" jdbcType="INT" property="productId" />
         <result column="date" jdbcType="DATETIME" property="date" />
         <result column="address" jdbcType="VARCHAR" property="address" />
-    </resultMap>
-    <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.Product">
-        <id column="productId" jdbcType="INT" property="productId" />
+
+    <association property="Product" javaType="com.unicom.salesmanagebehind.model.Product">
+        <id column="productId" jdbcType="INTEGER" property="productId" />
         <result column="productName" jdbcType="VARCHAR" property="productName" />
-        <result column="productFee" jdbcType="INT" property="productFee" />
+        <result column="productFee" jdbcType="INTEGER" property="productFee" />
         <result column="recommend" jdbcType="VARCHAR" property="recommend" />
         <result column="description" jdbcType="VARCHAR" property="description" />
-        <result column="isFirstPush" jdbcType="INT" property="isFirstPush" />
-        <result column="startTime" jdbcType="DATETIME" property="startTime" />
-        <result column="endTime" jdbcType="DATETIME" property="endTime" />
-        <result column="updateUserId" jdbcType="INT" property="updateUserId" />
-        <result column="updateTime" jdbcType="DATETIME" property="updateTime" />
+        <result column="isFirstPush" jdbcType="INTEGER" property="isFirstPush" />
+        <result column="startTime" jdbcType="TIMESTAMP" property="startTime" />
+        <result column="endTime" jdbcType="TIMESTAMP" property="endTime" />
+        <result column="updateUser" jdbcType="VARCHAR" property="updateUser" />
+        <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
         <result column="imgUrl" jdbcType="VARCHAR" property="imgUrl" />
-        <result column="isDelete" jdbcType="INT" property="isDelete" />
+        <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
+    </association>
     </resultMap>
-
-    <select id="selectDay" parameterType="int" resultMap="int">
+    <select id="selectDay" parameterType="int" resultMap="java.lang.Integer">
         SELECT sum(productFee)
         from product,sales
         WHERE product.productId = sales.productId
         and to_days(sales.date) = to_days(now())
     </select>
 
-    <select id="selectMonth" parameterType="int" resultMap="int">
+    <select id="selectMonth" parameterType="int" resultMap="java.lang.Integer">
         SELECT sum(productFee)
         from product,sales
         WHERE product.productId = sales.productId
@@ -38,7 +38,7 @@
 
     </select>
 
-    <select id="selectYear" parameterType="int" resultMap="int">
+    <select id="selectYear" parameterType="int" resultMap="java.lang.Integer">
         SELECT sum(productFee)
         from product,sales
         WHERE product.productId = sales.productId

@@ -3,9 +3,11 @@ package com.unicom.salesmanagebehind.serviceImpl;
 import com.unicom.salesmanagebehind.dao.DashboardDao;
 import com.unicom.salesmanagebehind.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DashboardServiceImpl implements DashboardService {
 
     @Autowired

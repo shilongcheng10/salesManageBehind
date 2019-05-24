@@ -1,11 +1,9 @@
 package com.unicom.salesmanagebehind.service;
 
 
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-@Service
+
 public interface DashboardService {
     //查询当日销售额
     int selectDay();
