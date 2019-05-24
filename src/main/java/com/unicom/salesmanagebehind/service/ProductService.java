@@ -11,4 +11,8 @@ import com.unicom.salesmanagebehind.model.Product;
 public interface ProductService {
     public int insertItem(Product product);
     public List<Product> getList();
+
+    public void update(Product product);
+    public Product getItemById(int id);
+    public String getImgSrcById(int productId);
 }

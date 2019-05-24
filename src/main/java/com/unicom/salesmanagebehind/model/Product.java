@@ -20,7 +20,7 @@ public class Product {
 
     private Date endTime;
 
-    private int updateUserId;
+    private String updateUser;
 
     private Date updateTime;
 
@@ -92,12 +92,13 @@ public class Product {
         this.endTime = endTime;
     }
 
-    public int getUpdateUserId() {
-        return updateUserId;
+
+    public String getUpdateUser() {
+        return updateUser;
     }
 
-    public void setUpdateUserId(int updateUserId) {
-        this.updateUserId = updateUserId;
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
     }
 
     public Date getUpdateTime() {
@@ -122,5 +123,41 @@ public class Product {
 
     public void setIsDelete(int isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public Product(int productId, String productName, int productFee, String recommend, String description, int isFirstPush, Date startTime, Date endTime, String updateUser, Date updateTime, String imgUrl, int isDelete) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productFee = productFee;
+        this.recommend = recommend;
+        this.description = description;
+        this.isFirstPush = isFirstPush;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.updateUser = updateUser;
+        this.updateTime = updateTime;
+        this.imgUrl = imgUrl;
+        this.isDelete = isDelete;
+    }
+
+    public Product() {
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", productFee=" + productFee +
+                ", recommend='" + recommend + '\'' +
+                ", description='" + description + '\'' +
+                ", isFirstPush=" + isFirstPush +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", updateUser=" + updateUser +
+                ", updateTime=" + updateTime +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", isDelete=" + isDelete +
+                '}';
     }
 }

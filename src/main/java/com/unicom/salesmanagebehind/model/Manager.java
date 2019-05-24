@@ -18,6 +18,18 @@ public class Manager {
     private int role;
 
     private int isDelete;
+    private String token;
+
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+
 
     public int getManagerId() {
         return managerId;
@@ -94,7 +106,7 @@ public class Manager {
     public Manager() {
     }
 
-    public Manager(int managerId, String managerName, String loginName, String managerSex, String password, String managerTel, String managerEmail, int role, int isDelete) {
+    public Manager(int managerId, String managerName, String loginName, String managerSex, String password, String managerTel, String managerEmail, int role, int isDelete, String token) {
         this.managerId = managerId;
         this.managerName = managerName;
         this.loginName = loginName;
@@ -104,5 +116,6 @@ public class Manager {
         this.managerEmail = managerEmail;
         this.role = role;
         this.isDelete = isDelete;
+        this.token = token;
     }
 }
