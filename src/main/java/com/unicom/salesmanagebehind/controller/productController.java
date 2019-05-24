@@ -28,6 +28,7 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+
     @Value("${app.ip}")
     private String ipaddress;
     @Autowired
@@ -164,5 +165,7 @@ public class ProductController {
         }
 
     }
+
+    //@RequestMapping(value="{id}",)
 }
 
