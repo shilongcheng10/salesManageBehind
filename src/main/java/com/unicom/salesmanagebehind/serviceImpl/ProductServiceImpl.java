@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public String getImgSrc(int productId) {
+    public String getImgSrcById(int productId) {
         return productDao.getPrdocutImgSrc(productId);
     }
 

@@ -80,4 +80,18 @@ public class Saleman {
     public void setIsDelete(int isDelete) {
         this.isDelete = isDelete;
     }
+
+    public Saleman(){
+    }
+
+    public Saleman(int saleId, String saleName, int saleSex, String saleTelNum, String commision, int saleProductNum, int saleTotalPrice, int isDelete) {
+        this.saleId = saleId;
+        this.saleName = saleName;
+        this.saleSex = saleSex;
+        this.saleTelNum = saleTelNum;
+        this.commision = commision;
+        this.saleProductNum = saleProductNum;
+        this.saleTotalPrice = saleTotalPrice;
+        this.isDelete = isDelete;
+    }
 }

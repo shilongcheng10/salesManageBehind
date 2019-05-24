@@ -1,5 +1,9 @@
 package com.unicom.salesmanagebehind.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.sql.Date;
+
 public class Notice {
     private Integer noticeId;
 
@@ -7,7 +11,7 @@ public class Notice {
 
     private String noticeContent;
 
-    private String updateTime;
+    private Date updateTime;
 
     private String updateUserId;
 
@@ -35,11 +39,11 @@ public class Notice {
         this.noticeContent = noticeContent;
     }
 
-    public String getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 

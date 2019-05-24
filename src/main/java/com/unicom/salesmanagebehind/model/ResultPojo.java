@@ -44,6 +44,7 @@ public class ResultPojo<T> {
         this.data = data;
     }
     public ResultPojo() {
+
         super();
     }
 }
