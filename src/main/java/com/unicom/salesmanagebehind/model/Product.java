@@ -28,6 +28,7 @@ public class Product {
 
     private int isDelete;
 
+    private int salesCount;
     public int getProductId() {
         return productId;
     }
@@ -125,7 +126,20 @@ public class Product {
         this.isDelete = isDelete;
     }
 
-    public Product(int productId, String productName, int productFee, String recommend, String description, int isFirstPush, Date startTime, Date endTime, String updateUser, Date updateTime, String imgUrl, int isDelete) {
+
+
+    public Product() {
+    }
+
+    public int getSalesCount() {
+        return salesCount;
+    }
+
+    public void setSalesCount(int salesCount) {
+        this.salesCount = salesCount;
+    }
+
+    public Product(int productId, String productName, int productFee, String recommend, String description, int isFirstPush, Date startTime, Date endTime, String updateUser, Date updateTime, String imgUrl, int isDelete, int salesCount) {
         this.productId = productId;
         this.productName = productName;
         this.productFee = productFee;
@@ -138,9 +152,7 @@ public class Product {
         this.updateTime = updateTime;
         this.imgUrl = imgUrl;
         this.isDelete = isDelete;
-    }
-
-    public Product() {
+        this.salesCount = salesCount;
     }
 
     @Override
@@ -154,10 +166,11 @@ public class Product {
                 ", isFirstPush=" + isFirstPush +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
-                ", updateUser=" + updateUser +
+                ", updateUser='" + updateUser + '\'' +
                 ", updateTime=" + updateTime +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", isDelete=" + isDelete +
+                ", salesCount=" + salesCount +
                 '}';
     }
 }
