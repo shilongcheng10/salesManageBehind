@@ -5,7 +5,7 @@
     <id column="noticeId" jdbcType="INTEGER" property="noticeId" />
     <result column="noticeTitle" jdbcType="VARCHAR" property="noticeTitle" />
     <result column="noticeContent" jdbcType="VARCHAR" property="noticeContent" />
-    <result column="updateTime" jdbcType="VARCHAR" property="updateTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="updateUserId" jdbcType="VARCHAR" property="updateUserId" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -17,17 +17,50 @@
     from notice
     where noticeId = #{noticeId,jdbcType=INTEGER}
   </select>
+  <!--<select id="getListByCondition" resultMap="BaseResultMap">-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from notice-->
+    <!--where noticeTitle like concat('%',#{noticeTitle},'%')-->
+  <!--</select>-->
+  <select id="getListByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from notice
+    <where>
+      <if test="noticeTitle!=null">
+        and noticeTitle like '%${noticeTitle}%'
+      </if>
+      <if test="updateTime!=null">
+        and updateTime like '%${updateTime}%'
+      </if>
+
+    </where>
+    order by updateTime desc
+  </select>
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from notice
     where noticeId = #{noticeId,jdbcType=INTEGER}
   </delete>
+
+  <delete id="deleteByIds" parameterType="list">
+    delete from notice where noticeId in
+    <foreach collection="list" item="noticeId" open="(" close=")" separator=",">
+      #{noticeId}
+    </foreach>
+  </delete>
+
+
   <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Notice">
     <selectKey keyProperty="noticeId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into notice (noticeTitle, noticeContent, updateTime, 
       updateUserId)
-    values (#{noticeTitle,jdbcType=VARCHAR}, #{noticeContent,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
+    values (#{noticeTitle,jdbcType=VARCHAR}, #{noticeContent,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
       #{updateUserId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Notice">
@@ -57,7 +90,7 @@
         #{noticeContent,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=VARCHAR},
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUserId != null">
         #{updateUserId,jdbcType=VARCHAR},
@@ -74,7 +107,7 @@
         noticeContent = #{noticeContent,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
-        updateTime = #{updateTime,jdbcType=VARCHAR},
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUserId != null">
         updateUserId = #{updateUserId,jdbcType=VARCHAR},
@@ -86,7 +119,7 @@
     update notice
     set noticeTitle = #{noticeTitle,jdbcType=VARCHAR},
       noticeContent = #{noticeContent,jdbcType=VARCHAR},
-      updateTime = #{updateTime,jdbcType=VARCHAR},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
       updateUserId = #{updateUserId,jdbcType=VARCHAR}
     where noticeId = #{noticeId,jdbcType=INTEGER}
   </update>

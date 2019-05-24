@@ -57,4 +57,21 @@ public class FileUtils {
             return ResultUtils.error(-2, "上传失败");
         }
     }
+
+    public static ResultPojo delete(String relativeFilePath){
+        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath()+"static";
+        File file=new File(path+relativeFilePath);
+        if(!file.exists()){
+            System.out.println("文件" + relativeFilePath + "不存在");
+            return ResultUtils.error(-1,"文件不存在！");
+        }
+        if (file.delete()){
+            return ResultUtils.success("删除成功！");
+        }else{
+            return ResultUtils.error(-2,"删除失败！");
+        }
+
+
+
+    }
 }
