@@ -15,11 +15,6 @@ import java.util.List;
 public class MonthSalesController {
     @Autowired
     private MonthSalesService monthSalesService;
-/*    public ResultPojo get()
-    {
-        return ResultUtils.success("传输成功",new Product());
-
-    }*/
     @RequestMapping(value="list")
     public JSONResult getMonthSales(){
         List<MonthSale> list= monthSalesService.getSales();
@@ -33,7 +28,6 @@ public class MonthSalesController {
         }
         //添加 月差额 列
         for(int i=1;i<list.size();i++){
-            System.out.println(list.get(i).getSaleVolume());
             int a=list.get(i).getSaleVolume()-list.get(i-1).getSaleVolume();
             list.get(i).setMonthDifference(a);
         }
