@@ -114,5 +114,42 @@ public class ProductController {
 
     }
 
+    @Transactional
+    @RequestMapping(value="setFirstPush",method = RequestMethod.PUT)
+    public ResultPojo setFirstPush(@RequestParam String params){
+        JSONObject jsonObject = JSONObject.parseObject(params);
+        int id = (int)jsonObject.get("id");
+        Product product = new Product();
+        product.setProductId(id);
+        product.setIsFirstPush(1);
+        try {
+            productService.update(product);
+            if ( productService.setNotFirstPush(id)== 0){
+                return ResultUtils.success("设置首推成功");
+            }else{
+                return ResultUtils.error(-1,"设置首推失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtils.error(-2,e.getMessage());
+        }
+    }
+
+    @RequestMapping(value="delete",method = RequestMethod.PUT)
+    public ResultPojo deleteItem(@RequestParam String params){
+        JSONObject jsonObject = JSONObject.parseObject(params);
+        int id = (int)jsonObject.get("id");
+        Product product = new Product();
+        product.setProductId(id);
+        product.setIsDelete(1);
+        try {
+            productService.update(product);
+            return ResultUtils.success("删除成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return  ResultUtils.error(-1,"删除失败");
+        }
+    }
+
 }
 

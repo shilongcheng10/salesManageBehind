@@ -17,4 +17,6 @@ public interface ProductService {
     public String getImgSrcById(int productId);
 
     public  Product getItemInfo(int productId);
+
+    public int setNotFirstPush(int productId);
 }
