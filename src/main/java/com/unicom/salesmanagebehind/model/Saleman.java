@@ -17,6 +17,8 @@ public class Saleman {
 
     private int isDelete;
 
+    private int salesCount;
+
     public int getSaleId() {
         return saleId;
     }
@@ -81,10 +83,18 @@ public class Saleman {
         this.isDelete = isDelete;
     }
 
+    public int getSalesCount() {
+        return salesCount;
+    }
+
+    public void setSalesCount(int salesCount) {
+        this.salesCount = salesCount;
+    }
+
     public Saleman(){
     }
 
-    public Saleman(int saleId, String saleName, int saleSex, String saleTelNum, String commision, int saleProductNum, int saleTotalPrice, int isDelete) {
+    public Saleman(int saleId, String saleName, int saleSex, String saleTelNum, String commision, int saleProductNum, int saleTotalPrice, int isDelete,int salesCount) {
         this.saleId = saleId;
         this.saleName = saleName;
         this.saleSex = saleSex;
@@ -93,5 +103,6 @@ public class Saleman {
         this.saleProductNum = saleProductNum;
         this.saleTotalPrice = saleTotalPrice;
         this.isDelete = isDelete;
+        this.salesCount = salesCount;
     }
 }

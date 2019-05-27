@@ -6,10 +6,10 @@
     <result column="noticeTitle" jdbcType="VARCHAR" property="noticeTitle" />
     <result column="noticeContent" jdbcType="VARCHAR" property="noticeContent" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="updateUserId" jdbcType="VARCHAR" property="updateUserId" />
+    <result column="updateUser" jdbcType="VARCHAR" property="updateUser" />
   </resultMap>
   <sql id="Base_Column_List">
-    noticeId, noticeTitle, noticeContent, updateTime, updateUserId
+    noticeId, noticeTitle, noticeContent, updateTime, updateUser
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -34,7 +34,6 @@
       <if test="updateTime!=null">
         and updateTime like '%${updateTime}%'
       </if>
-
     </where>
     order by updateTime desc
   </select>
@@ -59,9 +58,9 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into notice (noticeTitle, noticeContent, updateTime, 
-      updateUserId)
+      updateUser)
     values (#{noticeTitle,jdbcType=VARCHAR}, #{noticeContent,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
-      #{updateUserId,jdbcType=VARCHAR})
+      #{updateUser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Notice">
     <selectKey keyProperty="noticeId" order="AFTER" resultType="java.lang.Integer">
@@ -78,8 +77,8 @@
       <if test="updateTime != null">
         updateTime,
       </if>
-      <if test="updateUserId != null">
-        updateUserId,
+      <if test="updateUser != null">
+        updateUser,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -92,8 +91,8 @@
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateUserId != null">
-        #{updateUserId,jdbcType=VARCHAR},
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -109,8 +108,8 @@
       <if test="updateTime != null">
         updateTime = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateUserId != null">
-        updateUserId = #{updateUserId,jdbcType=VARCHAR},
+      <if test="updateUser != null">
+        updateUser = #{updateUser,jdbcType=VARCHAR},
       </if>
     </set>
     where noticeId = #{noticeId,jdbcType=INTEGER}
@@ -120,7 +119,7 @@
     set noticeTitle = #{noticeTitle,jdbcType=VARCHAR},
       noticeContent = #{noticeContent,jdbcType=VARCHAR},
       updateTime = #{updateTime,jdbcType=TIMESTAMP},
-      updateUserId = #{updateUserId,jdbcType=VARCHAR}
+      updateUser = #{updateUser,jdbcType=VARCHAR}
     where noticeId = #{noticeId,jdbcType=INTEGER}
   </update>
 </mapper>
