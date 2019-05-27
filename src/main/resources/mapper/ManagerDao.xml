@@ -114,14 +114,13 @@
         managerEmail = #{managerEmail,jdbcType=VARCHAR},
       </if>
       <if test="token != null">
-        #{token,jdbcType=VARCHAR},
+        token= #{token,jdbcType=VARCHAR},
       </if>
-      <if test="isDelete != null">
         isDelete = #{isDelete,jdbcType=INTEGER},
-      </if>
     </set>
     where managerId = #{managerId,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.unicom.salesmanagebehind.model.Manager">
     update manager
     set managerName = #{managerName,jdbcType=VARCHAR},
@@ -234,10 +233,32 @@
   </select>
 
   <select id="isLoginSuccess" parameterType="java.lang.String" resultType="com.unicom.salesmanagebehind.model.Manager">
-    select loginName,password from
+    select managerId,loginName,password from
         manager
     where
         loginName=#{loginName,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
   </select>
 
+
+  <select id="getUserInfoByToken" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    managerId,managerName,loginName,managerSex,managerTel,managerEmail,token
+    from manager
+    where
+        token=#{token,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getTokenById" parameterType="int" resultType="java.lang.String">
+    select token
+    from manager
+    where
+        managerId=#{managerId,jdbcType=INTEGER}
+  </select>
+
+  <update id="updateTokenByToken" parameterType="java.lang.String">
+    update manager
+    set token='logout'
+    where
+        token = #{token,jdbcType=VARCHAR}
+  </update>
 </mapper>

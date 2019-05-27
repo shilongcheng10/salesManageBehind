@@ -42,4 +42,24 @@ public class ManagerServiceImpl implements ManagerService {
     public String getLoginNameByToken(String token) {
         return managerDao.getLoginNameByToken(token);
     }
+
+    @Override
+    public void updateTokenById(Manager manager) {
+        managerDao.updateByPrimaryKeySelective(manager);
+    }
+
+    @Override
+    public String getTokenById(int id) {
+        return managerDao.getTokenById(id);
+    }
+
+    @Override
+    public Manager getUserInfoByToken(String token) {
+        return managerDao.getUserInfoByToken(token);
+    }
+
+    @Override
+    public void logout(String token) {
+        managerDao.updateTokenByToken(token);
+    }
 }

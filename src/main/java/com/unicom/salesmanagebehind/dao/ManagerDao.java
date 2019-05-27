@@ -33,4 +33,13 @@ public interface ManagerDao {
     int insertSelective(Manager record);
 
     String getLoginNameByToken(String token);
+
+    void updateByPrimaryKeySelective(Manager manager);
+
+    Manager getUserInfoByToken(String token);
+
+
+    String getTokenById(int managerId);
+
+    void updateTokenByToken(String token);
 }

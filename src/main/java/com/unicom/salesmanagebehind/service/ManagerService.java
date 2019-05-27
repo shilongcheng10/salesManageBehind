@@ -21,4 +21,12 @@ public interface ManagerService {
 
     String getLoginNameByToken(String token);
 
+    void updateTokenById(Manager manager);
+
+
+    String getTokenById(int id);
+
+    Manager getUserInfoByToken(String token);
+
+    void logout(String token);
 }
