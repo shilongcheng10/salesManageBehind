@@ -42,5 +42,22 @@ public class ProductServiceImpl implements ProductService {
         return productDao.getPrdocutImgSrc(productId);
     }
 
+    @Override
+    public Product getItemInfo(int productId) {
+        return productDao.selectByPrimaryKey(productId);
+    }
+
+    @Override
+    public int setNotFirstPush(int productId) {
+        try{
+            productDao.setNotFirstPush(productId);
+            return 0;
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+
+    }
+
 
 }

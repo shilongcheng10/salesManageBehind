@@ -21,6 +21,13 @@
     userId, userName, userSex, userAge, birth, productId, fee, tel, status, activeDate, 
     onlineTime, isCbss, IDCard, cardType
   </sql>
+
+  <select id="getUserList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
