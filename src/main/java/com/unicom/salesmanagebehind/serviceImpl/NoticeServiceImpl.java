@@ -48,7 +48,7 @@ public class NoticeServiceImpl implements NoticeService {
      */
     public int addNotice(Notice notice) {
 
-        return noticeDao.insert(notice);
+        return noticeDao.insertSelective(notice);
     }
 
     /**
