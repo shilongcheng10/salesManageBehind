@@ -135,6 +135,7 @@ public class ProductController {
         }
     }
 
+    @Transactional
     @RequestMapping(value="delete",method = RequestMethod.PUT)
     public ResultPojo deleteItem(@RequestParam String params){
         JSONObject jsonObject = JSONObject.parseObject(params);
