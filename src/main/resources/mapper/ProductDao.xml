@@ -20,9 +20,18 @@
     endTime, updateUser, updateTime, imgUrl, isDelete
   </sql>
   <select id="getList" resultMap="BaseResultMap">
-        select * from product
-        where
-            isDelete=0
+      SELECT a.*,IFNULL(b.num,0) as salesCount
+        FROM
+	        product a LEFT JOIN
+	        ( SELECT productId, count( * ) as num FROM sales GROUP BY productId) AS b
+        ON
+			a.productId=b.productId
+		where
+	        a.isDelete = 0
+			and a.endTime >= sysdate( )
+
+        ORDER BY
+	    a.isFirstPush DESC
   </select>
 
   <select id="getPrdocutImgSrc" parameterType="int" resultType="java.lang.String">
@@ -34,7 +43,7 @@
   <select id="selectByPrimaryKey" parameterType="int" resultType="com.unicom.salesmanagebehind.model.Product">
     select
     <include refid="Base_Column_List" />,
-    (select count(1) from sales where productId=#{productId,jdbcType=INTEGER}) as productSalesCount
+    (select count(1) from sales where productId=#{productId,jdbcType=INTEGER}) as salesCount
     from product
     where productId = #{productId,jdbcType=INTEGER}
     and isDelete=0
@@ -163,6 +172,13 @@
       imgUrl = #{imgUrl,jdbcType=VARCHAR},
       isDelete = #{isDelete,jdbcType=INTEGER}
     where productId = #{productId,jdbcType=INTEGER}
+  </update>
+
+  <update id="setNotFirstPush" parameterType="int">
+    update product set
+        isFirstPush = 0
+    where
+        productId !=#{productId,jdbcType=INTEGER}
   </update>
 
 

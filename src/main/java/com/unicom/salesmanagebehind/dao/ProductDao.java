@@ -23,4 +23,6 @@ public interface ProductDao {
 
     String getPrdocutImgSrc(int productId);
 
+
+    void setNotFirstPush(int productId);
 }

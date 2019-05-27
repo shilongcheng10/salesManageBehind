@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ManagerService {
 
+    Manager isLoginSuccess(Manager manager);
+
     List<Manager> getList(Integer managerId,String managerName,String loginName,String managerTel);
 
     int add(Manager manager);

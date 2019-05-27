@@ -1,4 +1,3 @@
-
 package com.unicom.salesmanagebehind.dao;
 
 import com.unicom.salesmanagebehind.model.Manager;
@@ -11,12 +10,10 @@ import java.util.List;
 
 @Repository
 @Mapper
-public interface ManagerDao {
-
-    Manager isLoginSuccess(Manager manager);
+public interface PersonalDao {
 
     //    @Select("select * from manager")
-    List<Manager> getList(@Param("managerId")Integer managerId,@Param("managerName")String managerName, @Param("loginName")String loginName,@Param("managerTel") String managerTel);
+    List<Manager> getList(@Param("managerId")Integer managerId,@Param("managerName")String managerName,@Param("loginName")String loginName,@Param("managerSex") String managerSex,@Param("managerEmail") String managerEmail,@Param("managerTel") String managerTel);
 
     int addManager(Manager manager);
 
@@ -32,5 +29,4 @@ public interface ManagerDao {
 
     int insertSelective(Manager record);
 
-    String getLoginNameByToken(String token);
 }
