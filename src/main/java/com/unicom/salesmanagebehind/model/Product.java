@@ -28,6 +28,7 @@ public class Product {
 
     private int isDelete;
 
+    private int salesCount;
     public int getProductId() {
         return productId;
     }
@@ -123,5 +124,53 @@ public class Product {
 
     public void setIsDelete(int isDelete) {
         this.isDelete = isDelete;
+    }
+
+
+
+    public Product() {
+    }
+
+    public int getSalesCount() {
+        return salesCount;
+    }
+
+    public void setSalesCount(int salesCount) {
+        this.salesCount = salesCount;
+    }
+
+    public Product(int productId, String productName, int productFee, String recommend, String description, int isFirstPush, Date startTime, Date endTime, String updateUser, Date updateTime, String imgUrl, int isDelete, int salesCount) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productFee = productFee;
+        this.recommend = recommend;
+        this.description = description;
+        this.isFirstPush = isFirstPush;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.updateUser = updateUser;
+        this.updateTime = updateTime;
+        this.imgUrl = imgUrl;
+        this.isDelete = isDelete;
+        this.salesCount = salesCount;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", productFee=" + productFee +
+                ", recommend='" + recommend + '\'' +
+                ", description='" + description + '\'' +
+                ", isFirstPush=" + isFirstPush +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", updateUser='" + updateUser + '\'' +
+                ", updateTime=" + updateTime +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", isDelete=" + isDelete +
+                ", salesCount=" + salesCount +
+                '}';
     }
 }

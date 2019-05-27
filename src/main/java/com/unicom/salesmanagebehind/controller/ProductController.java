@@ -11,6 +11,7 @@ import com.unicom.salesmanagebehind.utils.FileUtils;
 import com.unicom.salesmanagebehind.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,36 +35,20 @@ public class ProductController {
     private ManagerService managerService;
 
 
-
+    @Transactional
     @RequestMapping(value="add",method = RequestMethod.POST)
-    public ResultPojo addProduct(@RequestParam String params){
-        System.out.println(params);
-//        System.out.println(product);
-        JSONObject json=JSON.parseObject(params);
-        Product product = new Product();
-        product.setProductName(json.get("productName").toString());
-        product.setProductFee((int)json.get("productFee"));
-        product.setStartTime(DateUtil.parseDate(json.get("startTime").toString()));
-        product.setEndTime(DateUtil.parseDate(json.get("endTime").toString()));
-        product.setDescription(json.get("description").toString());
-        if (json.get("imgUrl")!=null){
-            product.setImgUrl(json.get("imgUrl").toString());
+    public ResultPojo addProduct(@RequestBody Product product){
+        System.out.println(product);
 
-        }
-//        else {
-//            product.setImgUrl("");
-//        }
-        String token=json.get("updateUser").toString();
+        String token=product.getUpdateUser();
         String updateUser=managerService.getLoginNameByToken(token);
         if (updateUser!=null&&!updateUser.isEmpty()){
             product.setUpdateUser(updateUser);
         }
-        product.setRecommend(json.get("recommend").toString());
         if (productService.insertItem(product)!=1){
             return ResultUtils.error(-1,"插入失败");
         }
-        System.out.println(product);
-        product.setImgUrl(ipaddress+json.get("imgUrl").toString());
+        product.setImgUrl(ipaddress+product.getImgUrl());
         product.setUpdateTime(new Date());
         return ResultUtils.success("插入成功",product);
     }
@@ -72,45 +57,6 @@ public class ProductController {
     @RequestMapping(value = "upload")
     public ResultPojo uploadImg(MultipartFile picture, HttpServletRequest request){
         return FileUtils.upload(picture);
-//        //获取文件在服务器的储存位置
-//        if (picture.isEmpty()) {
-//            return ResultUtils.error(-1,"上传失败，请选择文件");
-//        }
-//        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath()+"static/upload/";
-//        File folder = new File(path);
-//        System.out.println("文件的保存路径：" + path);
-//
-//        if (!folder.exists() && !folder.isDirectory()) {
-//            System.out.println("目录不存在，创建目录:" + folder);
-//            folder.mkdirs();
-//        }
-//
-//        //获取原始文件名称(包含格式)
-//        String originalFileName = picture.getOriginalFilename();
-//        System.out.println("原始文件名称：" + originalFileName);
-//
-//        //获取文件类型，以最后一个`.`为标识
-//        String type = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-//        System.out.println("文件类型：" + type);
-//
-//        //设置文件新名称: 当前时间+文件名称（不包含格式）
-//        String newName = UUID.randomUUID().toString() + originalFileName.substring(originalFileName.lastIndexOf("."));
-//        File newFile = new File(path + newName);
-//        System.out.println("新文件名称：" + newFile);
-//
-//
-//        //将文件保存到服务器指定位置
-//        try {
-//            picture.transferTo(newFile);
-//            System.out.println("上传成功");
-//            System.out.println(newName);
-//            //将文件在服务器的存储路径返回
-//            return ResultUtils.success("上传成功","/upload/" + newName);
-//        } catch (IOException e) {
-//            System.out.println("上传失败");
-//            e.printStackTrace();
-//            return ResultUtils.error(-2, "上传失败");
-//        }
     }
 
     @RequestMapping(value = "list",method = RequestMethod.GET)
@@ -125,29 +71,19 @@ public class ProductController {
         return ResultUtils.success("获得列表成功",list);
     }
 
-
+    @Transactional
     @RequestMapping(value="update",method = RequestMethod.POST)
-    public ResultPojo editProduct(@RequestParam String params){
-        JSONObject json=JSON.parseObject(params);
-        System.out.println(json.toString());
-        Product product = new Product();
-        product.setProductId((int)json.get("productId"));
-        product.setProductName(json.get("productName").toString());
-        product.setProductFee((int)json.get("productFee"));
-        product.setStartTime(DateUtil.parseDate(json.get("startTime").toString()));
-        product.setEndTime(DateUtil.parseDate(json.get("endTime").toString()));
-        product.setDescription(json.get("description").toString());
-        product.setRecommend(json.get("recommend").toString());
-        String imgUrl = json.get("imgUrl").toString();
+    public ResultPojo editProduct(@RequestBody Product product){
+        String imgUrl = product.getImgUrl();
         if (!imgUrl.contains("http")){
-            String filePath=productService.getImgSrcById((int)json.get("productId"));
+            String filePath=productService.getImgSrcById(product.getProductId());
             ResultPojo resultPojo=FileUtils.delete(filePath);
             if (resultPojo.getCode()!=0){
                 return ResultUtils.error(-2,"图片更新失败");
             }
             product.setImgUrl(imgUrl);
         }
-        String token=json.get("updateUser").toString();
+        String token=product.getUpdateUser();
         String updateUser=managerService.getLoginNameByToken(token).trim();
         if (updateUser!=null&&!updateUser.isEmpty()){
             product.setUpdateUser(updateUser);
@@ -164,5 +100,56 @@ public class ProductController {
         }
 
     }
+
+    @RequestMapping(value="detail",method = RequestMethod.GET)
+    public ResultPojo getItemInfo(@RequestParam String params){
+        JSONObject jsonObject = JSONObject.parseObject(params);
+        int id=(int)jsonObject.get("id");
+        Product product=productService.getItemInfo(id);
+        if (product==null){
+            return ResultUtils.error(-1,"获得套餐详情失败");
+        }
+        System.out.println(product);
+        return ResultUtils.success("获得套餐详情成功！",product);
+
+    }
+
+    @Transactional
+    @RequestMapping(value="setFirstPush",method = RequestMethod.PUT)
+    public ResultPojo setFirstPush(@RequestParam String params){
+        JSONObject jsonObject = JSONObject.parseObject(params);
+        int id = (int)jsonObject.get("id");
+        Product product = new Product();
+        product.setProductId(id);
+        product.setIsFirstPush(1);
+        try {
+            productService.update(product);
+            if ( productService.setNotFirstPush(id)== 0){
+                return ResultUtils.success("设置首推成功");
+            }else{
+                return ResultUtils.error(-1,"设置首推失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtils.error(-2,e.getMessage());
+        }
+    }
+
+    @RequestMapping(value="delete",method = RequestMethod.PUT)
+    public ResultPojo deleteItem(@RequestParam String params){
+        JSONObject jsonObject = JSONObject.parseObject(params);
+        int id = (int)jsonObject.get("id");
+        Product product = new Product();
+        product.setProductId(id);
+        product.setIsDelete(1);
+        try {
+            productService.update(product);
+            return ResultUtils.success("删除成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return  ResultUtils.error(-1,"删除失败");
+        }
+    }
+
 }
 
