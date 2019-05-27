@@ -71,13 +71,6 @@ public class Saleman {
         this.isDelete = isDelete;
     }
 
-//    public int getSalesCount() {
-//        return salesCount;
-//    }
-
-//    public void setSalesCount(int salesCount) {
-//        this.salesCount = salesCount;
-//    }
 
     public Saleman(){
     }
@@ -90,6 +83,6 @@ public class Saleman {
         this.isDelete = isDelete;
         this.saleProductNum=saleProductNum;
         this.saleTotalPrice=saleTotalPrice;
-//        this.salesCount = salesCount;
+
     }
 }
