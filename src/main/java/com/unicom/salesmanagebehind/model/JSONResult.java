@@ -4,7 +4,7 @@ import java.util.List;
 
 public class JSONResult {
 
-    class DataObject{
+    class DataObject {
         private int total;
         private List items;
 
@@ -35,6 +35,8 @@ public class JSONResult {
 
     private int code;
     private Object data;
+    private String msg;
+
 
     public int getCode() {
         return code;
@@ -52,30 +54,46 @@ public class JSONResult {
         this.data = data;
     }
 
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
     public JSONResult() {
     }
 
-    public JSONResult(int code, DataObject data) {
+    public JSONResult(int code, DataObject data, String msg) {
         this.code = code;
         this.data = data;
+        this.msg = msg;
     }
 
-    public JSONResult ok(Object datalist){
-        JSONResult result=new JSONResult();
+    public JSONResult ok(Object datalist) {
+        JSONResult result = new JSONResult();
         result.setCode(0);
 
         //判断给来数据是list的情况（DataObject）
-        if(datalist instanceof List){
-            DataObject data=new DataObject();
-            data.setTotal(((List)datalist).size());
-            data.setItems((List)datalist);
+        if (datalist instanceof List) {
+            DataObject data = new DataObject();
+            data.setTotal(((List) datalist).size());
+            data.setItems((List) datalist);
 
             result.setData(data);
-        }else{
+        } else {
             //给来的数据不是list
             result.setData(datalist);
         }
 
         return result;
     }
+    public JSONResult error(String  data) {
+        JSONResult result = new JSONResult();
+        result.setCode(200);
+        result.setData(data);
+        return result;
+    }
+
 }

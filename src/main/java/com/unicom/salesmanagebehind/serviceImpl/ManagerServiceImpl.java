@@ -13,6 +13,11 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Autowired
     private ManagerDao managerDao;
+
+    public Manager isLoginSuccess(Manager manager){
+        return managerDao.isLoginSuccess(manager);
+    }
+
     public List<Manager> getList(Integer managerId,String managerName,String loginName,String managerTel) {
         return managerDao.getList(managerId,managerName,loginName,managerTel);
     }

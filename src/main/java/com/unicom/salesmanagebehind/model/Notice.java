@@ -2,7 +2,7 @@ package com.unicom.salesmanagebehind.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Notice {
     private Integer noticeId;
@@ -10,10 +10,18 @@ public class Notice {
     private String noticeTitle;
 
     private String noticeContent;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",locale = "zh",timezone = "GMT+8")
     private Date updateTime;
 
-    private String updateUserId;
+    private String updateUser;
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
 
     public Integer getNoticeId() {
         return noticeId;
@@ -47,11 +55,14 @@ public class Notice {
         this.updateTime = updateTime;
     }
 
-    public String getUpdateUserId() {
-        return updateUserId;
-    }
-
-    public void setUpdateUserId(String updateUserId) {
-        this.updateUserId = updateUserId;
+    @Override
+    public String toString() {
+        return "Notice{" +
+                "noticeId=" + noticeId +
+                ", noticeTitle='" + noticeTitle + '\'' +
+                ", noticeContent='" + noticeContent + '\'' +
+                ", updateTime=" + updateTime +
+                ", updateUser='" + updateUser + '\'' +
+                '}';
     }
 }

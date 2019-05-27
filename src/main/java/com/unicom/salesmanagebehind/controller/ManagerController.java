@@ -17,6 +17,28 @@ public class ManagerController {
     @Autowired
     private ManagerService managerService;
 
+    @PostMapping("/login")
+    public JSONResult loginUser(@RequestBody Manager manager ) {
+//        Map<String,Object> result = new HashMap<String, Object>();
+        Manager manage = managerService.isLoginSuccess(manager);
+        if(manage!=null) {
+            return new JSONResult().ok("success");
+        }else{
+            return null;
+        }
+
+        /*if(manage!=null) {
+            result.put("code", 200);
+            result.put("msg", "登录成功");
+            String token = UUID.randomUUID().toString();
+            result.put("token", token);
+            return result;
+        }
+        result.put("code", 500);
+        result.put("msg", "登录失败");
+        return result;*/
+    }
+
     @GetMapping(value = "/list")
     public JSONResult selectList(
             @RequestParam(value = "page",defaultValue = "1") int page,
