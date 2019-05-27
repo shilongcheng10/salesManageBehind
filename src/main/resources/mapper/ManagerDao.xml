@@ -233,4 +233,11 @@
         token=#{token,jdbcType=VARCHAR}
   </select>
 
+  <select id="isLoginSuccess" parameterType="java.lang.String" resultType="com.unicom.salesmanagebehind.model.Manager">
+    select loginName,password from
+        manager
+    where
+        loginName=#{loginName,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
+  </select>
+
 </mapper>
