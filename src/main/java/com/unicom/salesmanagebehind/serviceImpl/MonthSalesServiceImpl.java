@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @program: saleManage
  * @description: 月销售接口实现
- * @author: Shilongcheng
+ * @author: XiongMing
  * @create: 2019-05-24 13:52
  **/
 @Service

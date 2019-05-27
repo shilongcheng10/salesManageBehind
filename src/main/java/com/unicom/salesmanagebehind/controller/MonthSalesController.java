@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "user")
+@RequestMapping(value = "MonthSale")
 public class MonthSalesController {
     @Autowired
     private MonthSalesService monthSalesService;
