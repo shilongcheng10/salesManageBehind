@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicom.salesmanagebehind.dao.DashboardDao">
+    <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.Sales">
+        <id column="saleId" jdbcType="INTEGER" property="saleId" />
+        <result column="salemanId" jdbcType="INTEGER" property="salemanId" />
+        <result column="productId" jdbcType="INTEGER" property="productId" />
+        <result column="date" jdbcType="TIMESTAMP" property="date" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+
+    <association property="Product" javaType="com.unicom.salesmanagebehind.model.Product">
+        <id column="productId" jdbcType="INTEGER" property="productId" />
+        <result column="productName" jdbcType="VARCHAR" property="productName" />
+        <result column="productFee" jdbcType="INTEGER" property="productFee" />
+        <result column="recommend" jdbcType="VARCHAR" property="recommend" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="isFirstPush" jdbcType="INTEGER" property="isFirstPush" />
+        <result column="startTime" jdbcType="TIMESTAMP" property="startTime" />
+        <result column="endTime" jdbcType="TIMESTAMP" property="endTime" />
+        <result column="updateUser" jdbcType="VARCHAR" property="updateUser" />
+        <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+        <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
+    </association>
+        <association property="SaleMan" javaType="com.unicom.salesmanagebehind.model.Saleman">
+            <id column="saleId" jdbcType="INTEGER" property="saleId" />
+            <result column="saleName" jdbcType="VARCHAR" property="saleName" />
+            <result column="saleSex" jdbcType="INTEGER" property="saleSex" />
+            <result column="saleTelNum" jdbcType="VARCHAR" property="saleTelNum" />
+            <result column="commision" jdbcType="VARCHAR" property="commision" />
+            <result column="saleProductNum" jdbcType="INTEGER" property="saleProductNum" />
+            <result column="saleTotalPrice" jdbcType="INTEGER" property="saleTotalPrice" />
+            <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
+        </association>
+    </resultMap>
+
+    <!-- 查询日销售额 -->
+    <select id="selectDay" resultType="java.lang.Integer">
+        SELECT IFNULL(sum(productFee),0) AS daySales
+        from product,sales
+        WHERE product.productId = sales.productId
+        and to_days(sales.date) = to_days(now())
+    </select>
+
+    <!-- 查询月销售额 -->
+    <select id="selectMonth" resultType="java.lang.Integer">
+        SELECT IFNULL(sum(productFee),0) AS monthSales
+        from product,sales
+        WHERE product.productId = sales.productId
+        and DATE_FORMAT( sales.date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+
+    </select>
+
+    <!-- 查询年销售额 -->
+    <select id="selectYear" resultType="java.lang.Integer">
+        SELECT IFNULL(sum(productFee),0) AS yearSales
+        from product,sales
+        WHERE product.productId = sales.productId
+        and YEAR(sales.date)=YEAR(NOW())
+    </select>
+
+    <!-- 当月销量最高的四个套餐 -->
+    <select id="selectProduct"  resultType="com.unicom.salesmanagebehind.model.Product">
+        select b.*, Allsales.salesCount
+        from
+        product b,
+        (select a.productId as salesProductId,COUNT(*) as salesCount from sales a WHERE DATE_FORMAT( a.date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) GROUP BY productId) as Allsales
+        WHERE b.productId=Allsales.salesProductId
+        ORDER BY Allsales.salesCount DESC
+        LIMIT 4
+    </select>
+
+    <!-- 当月销售数量最高的营销人员 -->
+    <select id="selectSaleMan"  resultType="com.unicom.salesmanagebehind.model.Saleman">
+        select b.*, Allsales.salesCount
+        from
+        saleman b,
+        (select a.salemanId,COUNT(*) as salesCount from sales a WHERE DATE_FORMAT( a.date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) GROUP BY salemanId) as Allsales
+        WHERE b.saleId=Allsales.salemanId
+        ORDER BY Allsales.salesCount DESC
+        LIMIT 4
+    </select>
+
+</mapper>
