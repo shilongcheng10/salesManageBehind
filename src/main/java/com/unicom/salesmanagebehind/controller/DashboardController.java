@@ -18,8 +18,7 @@ public class DashboardController {
     private DashboardService dashboardService;
 
     @GetMapping(value = "/moneyList")
-    public JSONResult showMoney(){
-
+    public JSONResult showMoney(){ //日/月/年 销售额
         List<Integer> list = new ArrayList();
         list.add(dashboardService.selectDay());
         list.add(dashboardService.selectMonth());
@@ -28,8 +27,12 @@ public class DashboardController {
     }
 
     @GetMapping(value = "/productList")
-    public JSONResult showProduct(){
+    public JSONResult showProduct(){ //热销套餐
         return new JSONResult().ok(dashboardService.selectProduct());
     }
 
+    @GetMapping(value = "/saleManList")
+    public JSONResult showSaleMan(){ //销售精英
+        return new JSONResult().ok(dashboardService.selectSaleMan());
+    }
 }

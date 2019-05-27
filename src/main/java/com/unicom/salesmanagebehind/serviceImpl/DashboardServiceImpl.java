@@ -1,6 +1,9 @@
 package com.unicom.salesmanagebehind.serviceImpl;
 
 import com.unicom.salesmanagebehind.dao.DashboardDao;
+import com.unicom.salesmanagebehind.dao.ProductDao;
+import com.unicom.salesmanagebehind.model.Product;
+import com.unicom.salesmanagebehind.model.Saleman;
 import com.unicom.salesmanagebehind.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,7 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Autowired
     private DashboardDao dashboardDao;
+    private ProductDao productDao;
 
     //查询当日销售额
     public int selectDay(){
@@ -29,14 +33,12 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     //套餐统计
-    public List selectProduct(){
-        List list = dashboardDao.selectProduct();
-
-        return list;
+    public List<Product> selectProduct(){
+        return dashboardDao.selectProduct();
     }
 
     //营销人员统计
-    public List selectSaleMan(){
+    public List<Saleman> selectSaleMan(){
         return dashboardDao.selectSaleMan();
     }
 
