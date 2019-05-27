@@ -1,19 +1,32 @@
 package com.unicom.salesmanagebehind.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description="销售人员实体对象")
 public class Saleman {
+    @ApiModelProperty(value="销售人员id",name="saleId",required=true)
     private int saleId;
 
+    @ApiModelProperty(value="销售人员姓名",name="saleName",required=true)
     private String saleName;
 
+    @ApiModelProperty(value="销售人员性别",name="saleSex",required=true)
     private int saleSex;
 
+    @ApiModelProperty(value="销售人员手机号",name="saleTelNum",required=true)
     private String saleTelNum;
 
+
+    @ApiModelProperty(value="销售记录id",name="saleProductNum",required=true)
     private int saleProductNum;
 
+    @ApiModelProperty(value="销售人员销售总利润",name="saleTotalPrice",required=true)
     private int saleTotalPrice;
 
+    @ApiModelProperty(value="销售人员是否删除标志",name="isDelete",required=true)
     private int isDelete;
+
 
     public int getSaleId() {
         return saleId;
