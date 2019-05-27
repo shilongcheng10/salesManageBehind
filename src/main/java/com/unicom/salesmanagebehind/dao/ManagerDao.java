@@ -13,6 +13,8 @@ import java.util.List;
 @Mapper
 public interface ManagerDao {
 
+    Manager isLoginSuccess(Manager manager);
+
     //    @Select("select * from manager")
     List<Manager> getList(@Param("managerId")Integer managerId,@Param("managerName")String managerName, @Param("loginName")String loginName,@Param("managerTel") String managerTel);
 
