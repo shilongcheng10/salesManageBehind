@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-@Api(tags = {"触点营销后台管理系统-首页数据展示"})
+@Api(tags = {"触点营销后台管理系统-首页数据展示模块"})
 @RestController
 @RequestMapping(value = "dashboard")
 public class DashboardController {

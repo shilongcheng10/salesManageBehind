@@ -2,20 +2,27 @@ package com.unicom.salesmanagebehind.controller;
 
 import com.unicom.salesmanagebehind.model.*;
 import com.unicom.salesmanagebehind.service.MonthSalesService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@Api(tags = "触点营销后台管理系统-月销售报表模块")
 @RestController
 @RequestMapping(value = "MonthSale")
 public class MonthSalesController {
     @Autowired
     private MonthSalesService monthSalesService;
-    @RequestMapping(value="list")
+    @RequestMapping(value="list",method = RequestMethod.GET)
+    @ApiOperation(value = "获取月销售数据")
+    @ApiImplicitParam(name = "monthSale",value="月销售数据",required = true,dataType = "List")
     public JSONResult getMonthSales(){
         List<MonthSale> list= monthSalesService.getSales();
 
