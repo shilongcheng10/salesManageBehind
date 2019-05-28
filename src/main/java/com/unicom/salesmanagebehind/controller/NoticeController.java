@@ -63,7 +63,7 @@ public class NoticeController {
     @ApiOperation(value = "新增公告")
     public JSONResult addNotice(@RequestParam String params) throws Exception {
         JSONObject json = JSON.parseObject(params);
-        System.out.println("前端传的值9" + json.toString());
+//        System.out.println("前端传的值9" + json.toString());
         Notice notice = new Notice();
         notice.setUpdateTime(new Date());
         notice.setNoticeTitle(json.get("noticeTitle").toString());
@@ -130,8 +130,8 @@ public class NoticeController {
         PageHelper.startPage(page, limit);
 
         List<Notice> list = noticeService.getListByCondition(noticeTitle, updateTime);
-        System.out.println("后台返回的list" + list);
-        System.out.println();
+//        System.out.println("后台返回的list" + list);
+//        System.out.println();
 
         PageInfo<Notice> pageInfo = new PageInfo<>(list);
         return new JSONResult().ok(pageInfo);

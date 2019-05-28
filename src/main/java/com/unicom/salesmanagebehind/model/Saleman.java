@@ -9,15 +9,11 @@ public class Saleman {
 
     private String saleTelNum;
 
-    private String commision;
-
     private int saleProductNum;
 
     private int saleTotalPrice;
 
     private int isDelete;
-
-    private int salesCount;
 
     public int getSaleId() {
         return saleId;
@@ -25,6 +21,22 @@ public class Saleman {
 
     public void setSaleId(int saleId) {
         this.saleId = saleId;
+    }
+
+    public int getSaleProductNum() {
+        return saleProductNum;
+    }
+
+    public void setSaleProductNum(int saleProductNum) {
+        this.saleProductNum = saleProductNum;
+    }
+
+    public int getSaleTotalPrice() {
+        return saleTotalPrice;
+    }
+
+    public void setSaleTotalPrice(int saleTotalPrice) {
+        this.saleTotalPrice = saleTotalPrice;
     }
 
     public String getSaleName() {
@@ -51,30 +63,6 @@ public class Saleman {
         this.saleTelNum = saleTelNum;
     }
 
-    public String getCommision() {
-        return commision;
-    }
-
-    public void setCommision(String commision) {
-        this.commision = commision;
-    }
-
-    public int getSaleProductNum() {
-        return saleProductNum;
-    }
-
-    public void setSaleProductNum(int saleProductNum) {
-        this.saleProductNum = saleProductNum;
-    }
-
-    public int getSaleTotalPrice() {
-        return saleTotalPrice;
-    }
-
-    public void setSaleTotalPrice(int saleTotalPrice) {
-        this.saleTotalPrice = saleTotalPrice;
-    }
-
     public int getIsDelete() {
         return isDelete;
     }
@@ -83,26 +71,18 @@ public class Saleman {
         this.isDelete = isDelete;
     }
 
-    public int getSalesCount() {
-        return salesCount;
-    }
-
-    public void setSalesCount(int salesCount) {
-        this.salesCount = salesCount;
-    }
 
     public Saleman(){
     }
 
-    public Saleman(int saleId, String saleName, int saleSex, String saleTelNum, String commision, int saleProductNum, int saleTotalPrice, int isDelete,int salesCount) {
+    public Saleman(int saleId, String saleName, int saleSex, String saleTelNum, int saleProductNum, int saleTotalPrice, int isDelete) {
         this.saleId = saleId;
         this.saleName = saleName;
         this.saleSex = saleSex;
         this.saleTelNum = saleTelNum;
-        this.commision = commision;
-        this.saleProductNum = saleProductNum;
-        this.saleTotalPrice = saleTotalPrice;
         this.isDelete = isDelete;
-        this.salesCount = salesCount;
+        this.saleProductNum=saleProductNum;
+        this.saleTotalPrice=saleTotalPrice;
+
     }
 }
