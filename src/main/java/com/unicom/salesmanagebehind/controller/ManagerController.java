@@ -80,7 +80,7 @@ public class ManagerController {
     @GetMapping(value = "/list")
     public JSONResult selectList(
             @RequestParam(value = "page",defaultValue = "1") int page,
-            @RequestParam(value = "limit",defaultValue = "5") int limit,
+            @RequestParam(value = "limit",defaultValue = "10") int limit,
             @RequestParam(name = "managerId",defaultValue ="") Integer managerId,
             @RequestParam(name = "managerName",defaultValue = "") String managerName,
             @RequestParam(name = "loginName",defaultValue = "") String loginName,
