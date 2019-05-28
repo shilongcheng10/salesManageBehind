@@ -95,6 +95,8 @@ public class ProductController {
                 return ResultUtils.error(-2,"图片更新失败");
             }
             product.setImgUrl(imgUrl);
+        }else{
+            product.setImgUrl(null);
         }
         String token=product.getUpdateUser();
         String updateUser=managerService.getLoginNameByToken(token).trim();
@@ -105,8 +107,12 @@ public class ProductController {
         }
         try{
             productService.update(product);
+            if (imgUrl.contains("http")){
+                return ResultUtils.success("更新成功",imgUrl);
+            }else{
+                return ResultUtils.success("更新成功",ipaddress+productService.getImgSrcById(product.getProductId()));
+            }
 
-            return ResultUtils.success("更新成功",ipaddress+imgUrl);
         }catch (Exception e){
             e.printStackTrace();
             return ResultUtils.error(-1,"更新失败");

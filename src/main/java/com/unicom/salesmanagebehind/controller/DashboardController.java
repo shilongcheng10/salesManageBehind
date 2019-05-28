@@ -2,6 +2,7 @@ package com.unicom.salesmanagebehind.controller;
 
 import com.unicom.salesmanagebehind.model.JSONResult;
 import com.unicom.salesmanagebehind.service.DashboardService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+@Api(tags = {"触点营销后台管理系统-首页数据展示模块"})
 @RestController
 @RequestMapping(value = "dashboard")
 public class DashboardController {

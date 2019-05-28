@@ -6,6 +6,7 @@ import com.unicom.salesmanagebehind.model.JSONResult;
 import com.unicom.salesmanagebehind.model.Manager;
 import com.unicom.salesmanagebehind.model.ResultPojo;
 import com.unicom.salesmanagebehind.service.PersonalService;
+import com.unicom.salesmanagebehind.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,31 +19,30 @@ public class PersonalController {
     @Autowired
     private PersonalService personalService;
 
-    @GetMapping(value = "/list")
-    public JSONResult selectList(
-            @RequestParam(value = "page",defaultValue = "1") int page,
-            @RequestParam(value = "limit",defaultValue = "2") int limit,
-            @RequestParam(name = "managerId",defaultValue ="") Integer managerId,
-            @RequestParam(name = "managerName",defaultValue = "") String managerName,
-            @RequestParam(name = "loginName",defaultValue = "") String loginName,
-            @RequestParam(name = "managerSex",defaultValue = "") String managerSex,
-            @RequestParam(name = "managerEmail",defaultValue = "") String managerEmail,
-            @RequestParam(name = "managerTel",defaultValue = "") String managerTel
-    ) {
-        PageHelper.startPage(page,limit);
 
-        List<Manager> list = personalService.getList(managerId,managerName,loginName,managerSex,managerEmail,managerTel);
-
-        PageInfo<Manager> pageInfo =new PageInfo<>(list);
-
-        return new JSONResult().ok(pageInfo);
+    @GetMapping(value = "/getInfo")
+    public ResultPojo getManagerInfo(@RequestParam(name = "token") String token) {
+        if (token != null && !token.equals("")) {
+            Manager manager = personalService.getManagerInfo(token);
+            if (manager != null) {
+                return ResultUtils.success(manager);
+            } else {
+                return ResultUtils.error(-1, "获取用户信息失败");
+            }
+        }
+        return null;
     }
 
-    @PutMapping(value = "/update")
-    public JSONResult update(@RequestBody Manager manager){
-        personalService.update(manager);
 
-        return new JSONResult().ok("success");
+    @PostMapping (value = "/putInfo")
+    public ResultPojo updateManagerInfo(@RequestBody Manager manager) {
+        if (manager.getToken() != null && !manager.getToken().equals("")) {
+            manager.setToken(manager.getToken());
+          personalService.updateManagerInfo(manager);
+//            personalService.updateManagerInfo(manager);
+                return getManagerInfo(manager.getToken());
+        }
+        return null;
     }
 
 

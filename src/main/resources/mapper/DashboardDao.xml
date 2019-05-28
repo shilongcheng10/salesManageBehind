@@ -61,23 +61,23 @@
 
     <!-- 当月销量最高的四个套餐 -->
     <select id="selectProduct"  resultType="com.unicom.salesmanagebehind.model.Product">
-        select b.*, Allsales.salesCount
+        select b.*, IFNULL(Allsales.num,0) as salesCount
         from
         product b,
-        (select a.productId as salesProductId,COUNT(*) as salesCount from sales a WHERE DATE_FORMAT( a.date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) GROUP BY productId) as Allsales
+        (select a.productId as salesProductId,COUNT(*) as num from sales a WHERE DATE_FORMAT( a.date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) GROUP BY productId) as Allsales
         WHERE b.productId=Allsales.salesProductId
-        ORDER BY Allsales.salesCount DESC
+        ORDER BY salesCount DESC
         LIMIT 4
     </select>
 
     <!-- 当月销售数量最高的营销人员 -->
     <select id="selectSaleMan"  resultType="com.unicom.salesmanagebehind.model.Saleman">
-        select b.*, Allsales.salesCount
+        select b.*, IFNULL(Allsales.num,0) as salesCount
         from
         saleman b,
-        (select a.salemanId,COUNT(*) as salesCount from sales a WHERE DATE_FORMAT( a.date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) GROUP BY salemanId) as Allsales
+        (select a.salemanId,COUNT(*) as num from sales a WHERE DATE_FORMAT( a.date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) GROUP BY salemanId) as Allsales
         WHERE b.saleId=Allsales.salemanId
-        ORDER BY Allsales.salesCount DESC
+        ORDER BY salesCount DESC
         LIMIT 4
     </select>
 

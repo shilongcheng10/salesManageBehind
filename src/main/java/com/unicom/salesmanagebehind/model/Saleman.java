@@ -60,6 +60,14 @@ public class Saleman {
         this.saleName = saleName;
     }
 
+    public int getSalesCount() {
+        return salesCount;
+    }
+
+    public void setSalesCount(int salesCount) {
+        this.salesCount = salesCount;
+    }
+
     public int getSaleSex() {
         return saleSex;
     }
@@ -84,18 +92,20 @@ public class Saleman {
         this.isDelete = isDelete;
     }
 
+    @ApiModelProperty(value="该营销人员销售情况",name="salesCount",required=true)
+    private int salesCount;
 
     public Saleman(){
     }
 
-    public Saleman(int saleId, String saleName, int saleSex, String saleTelNum, int saleProductNum, int saleTotalPrice, int isDelete) {
+    public Saleman(int saleId, String saleName, int saleSex, String saleTelNum, int saleProductNum, int saleTotalPrice, int isDelete, int salesCount) {
         this.saleId = saleId;
         this.saleName = saleName;
         this.saleSex = saleSex;
         this.saleTelNum = saleTelNum;
+        this.saleProductNum = saleProductNum;
+        this.saleTotalPrice = saleTotalPrice;
         this.isDelete = isDelete;
-        this.saleProductNum=saleProductNum;
-        this.saleTotalPrice=saleTotalPrice;
-
+        this.salesCount = salesCount;
     }
 }

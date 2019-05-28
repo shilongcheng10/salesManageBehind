@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface PersonalService {
 
-    List<Manager> getList(Integer managerId,String managerName,String loginName,String managerSex,String managerEmail,String managerTel);
+    Manager getManagerInfo(String token);
+    void updateManagerInfo(Manager manager);
 
-    int update(Manager manager);
-
+//    String update(Manager manager);
 
 
 }
