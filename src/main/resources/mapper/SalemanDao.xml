@@ -6,9 +6,6 @@
     <result column="saleName" jdbcType="VARCHAR" property="saleName" />
     <result column="saleSex" jdbcType="INTEGER" property="saleSex" />
     <result column="saleTelNum" jdbcType="VARCHAR" property="saleTelNum" />
-    <result column="commision" jdbcType="VARCHAR" property="commision" />
-    <result column="saleProductNum" jdbcType="INTEGER" property="saleProductNum" />
-    <result column="saleTotalPrice" jdbcType="INTEGER" property="saleTotalPrice" />
     <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -52,8 +49,8 @@
   </delete>-->
   <!--增加一条记录-->
   <insert id="insert" parameterType="com.unicom.salesmanagebehind.model.Saleman">
-    insert into saleman (saleName, saleSex, saleTelNum, commision, saleProductNum, saleTotalPrice)
-    values (#{saleName,jdbcType=VARCHAR}, #{saleSex,jdbcType=INTEGER}, #{saleTelNum,jdbcType=VARCHAR},#{commision,jdbcType=VARCHAR}, #{saleProductNum,jdbcType=INTEGER}, #{saleTotalPrice,jdbcType=INTEGER})
+    insert into saleman (saleName, saleSex, saleTelNum)
+    values (#{saleName,jdbcType=VARCHAR}, #{saleSex,jdbcType=INTEGER}, #{saleTelNum,jdbcType=VARCHAR})
   </insert>
   <!--<insert id="insertSelective" parameterType="com.unicom.salesmanagebehind.model.Saleman">-->
     <!--<selectKey keyProperty="saleId" order="AFTER" resultType="int">-->

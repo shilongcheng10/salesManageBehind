@@ -7,6 +7,10 @@ import com.unicom.salesmanagebehind.model.ResultPojo;
 import com.unicom.salesmanagebehind.model.Saleman;
 import com.unicom.salesmanagebehind.service.SalemanService;
 import com.unicom.salesmanagebehind.utils.ResultUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "saleman")
+@Api(tags = "触点营销后台管理系统-营销人员管理模块")
 public class SalemanController {
     @Autowired SalemanService salemanService;
 
@@ -27,6 +32,13 @@ public class SalemanController {
      * @return
      */
     @GetMapping("getList")
+    @ApiOperation(value = "获取列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam( name="page",value = "分页分码",required=true,dataType="int"),
+            @ApiImplicitParam( name="limit",value = "每页条数",required=true,dataType="int"),
+            @ApiImplicitParam( name="saleId",value = "营销人员编号",required=true,dataType="Integer"),
+            @ApiImplicitParam( name="saleName",value = "营销人员姓名",required=true,dataType="String"),
+    })
 //    public JSONResult getList(){
 //        List<Saleman> list =salemanService.getList();
 //        return new JSONResult().ok(list);
@@ -50,6 +62,8 @@ public class SalemanController {
      * @return
      */
     @DeleteMapping (value = "delete")
+    @ApiOperation(value = "删除记录")
+    @ApiImplicitParam( name="saleId",value = "营销人员编号",required=true,dataType="int")
     public JSONResult delete(@RequestParam (name = "saleId") int id){
         salemanService.deleteByPrimaryKey(id);
         return new JSONResult().ok("success");
@@ -62,6 +76,8 @@ public class SalemanController {
      * @return
      */
     @PostMapping(value = "insert")
+    @ApiOperation(value = "新增记录")
+    @ApiImplicitParam( name="saleman",value = "新增营销人员",required=true,dataType="Saleman")
     public  JSONResult insert(@RequestBody Saleman saleman){
         salemanService.insert(saleman);
         return new JSONResult().ok("success");
@@ -80,6 +96,8 @@ public class SalemanController {
      * @return
      */
     @PutMapping(value = "update")
+    @ApiOperation(value = "更新记录")
+    @ApiImplicitParam( name="saleman",value = "更新营销人员",required=true,dataType="Saleman")
     public JSONResult update(@RequestBody Saleman saleman){
         salemanService.updateByPrimaryKeySelective(saleman);
         return new JSONResult().ok("success");
@@ -91,6 +109,8 @@ public class SalemanController {
      * @return
      */
     @DeleteMapping(value = "batchdel")
+    @ApiOperation(value = "批量删除记录")
+    @ApiImplicitParam( name="saleman",value = "批量删除营销人员",required=true,dataType="List")
     public JSONResult batchDelete(@RequestParam (name = "list")List<Integer> list){
         salemanService.batchDelete(list);
         return new JSONResult().ok("success");
