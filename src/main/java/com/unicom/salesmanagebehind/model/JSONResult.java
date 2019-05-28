@@ -41,8 +41,7 @@ public class JSONResult {
     private int code;
     @ApiModelProperty(value="返回数据",name="data",required=true)
     private Object data;
-    @ApiModelProperty(value="返回信息",name="msg",required=true)
-    private String msg;
+
 
 
     public int getCode() {
@@ -61,21 +60,14 @@ public class JSONResult {
         this.data = data;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     public JSONResult() {
     }
 
-    public JSONResult(int code, DataObject data, String msg) {
+    public JSONResult(int code, DataObject data) {
         this.code = code;
         this.data = data;
-        this.msg = msg;
+
     }
 
     public JSONResult ok(Object datalist) {
