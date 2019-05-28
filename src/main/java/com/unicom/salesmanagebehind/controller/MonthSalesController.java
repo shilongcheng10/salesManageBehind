@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@Api(tags = "触点营销后台管理系统-月销售报表")
+@Api(tags = "触点营销后台管理系统-月销售报表模块")
 @RestController
 @RequestMapping(value = "MonthSale")
 public class MonthSalesController {
