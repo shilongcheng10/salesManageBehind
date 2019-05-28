@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.unicom.salesmanagebehind.dao.UserDao">
-  <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.User">
+  <resultMap id="BaseResultMap" type="com.unicom.salesmanagebehind.model.UserPojo">
     <id column="userId" jdbcType="INTEGER" property="userId" />
     <result column="userName" jdbcType="VARCHAR" property="userName" />
     <result column="userSex" jdbcType="INTEGER" property="userSex" />
@@ -22,10 +22,12 @@
     onlineTime, isCbss, IDCard, cardType
   </sql>
 
-  <select id="getUserList" resultMap="BaseResultMap">
+  <select id="getUserList" resultType="com.unicom.salesmanagebehind.model.UserPojo">
     select
-    <include refid="Base_Column_List" />
-    from user
+    u.userId, u.userName, u.userSex, u.userAge, u.birth, u.fee, u.tel, u.status, u.activeDate,
+    u.onlineTime, u.isCbss, u.IDCard, u.cardType,p.productName
+    from user u,product p
+    where u.productId =p.productId
   </select>
 
   <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
