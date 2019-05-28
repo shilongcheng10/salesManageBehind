@@ -7,6 +7,8 @@ import com.unicom.salesmanagebehind.model.ResultPojo;
 import com.unicom.salesmanagebehind.model.Saleman;
 import com.unicom.salesmanagebehind.service.SalemanService;
 import com.unicom.salesmanagebehind.utils.ResultUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "saleman")
+@Api(tags = "触点营销后台管理系统-营销人员管理系统")
 public class SalemanController {
     @Autowired SalemanService salemanService;
 
@@ -27,6 +30,7 @@ public class SalemanController {
      * @return
      */
     @GetMapping("getList")
+    @ApiOperation(value = "列表")
 //    public JSONResult getList(){
 //        List<Saleman> list =salemanService.getList();
 //        return new JSONResult().ok(list);
@@ -50,6 +54,7 @@ public class SalemanController {
      * @return
      */
     @DeleteMapping (value = "delete")
+    @ApiOperation(value = "删除记录")
     public JSONResult delete(@RequestParam (name = "saleId") int id){
         salemanService.deleteByPrimaryKey(id);
         return new JSONResult().ok("success");
@@ -62,6 +67,7 @@ public class SalemanController {
      * @return
      */
     @PostMapping(value = "insert")
+    @ApiOperation(value = "新增记录")
     public  JSONResult insert(@RequestBody Saleman saleman){
         salemanService.insert(saleman);
         return new JSONResult().ok("success");
@@ -80,6 +86,7 @@ public class SalemanController {
      * @return
      */
     @PutMapping(value = "update")
+    @ApiOperation(value = "更新记录")
     public JSONResult update(@RequestBody Saleman saleman){
         salemanService.updateByPrimaryKeySelective(saleman);
         return new JSONResult().ok("success");
@@ -91,6 +98,7 @@ public class SalemanController {
      * @return
      */
     @DeleteMapping(value = "batchdel")
+    @ApiOperation(value = "批量删除记录")
     public JSONResult batchDelete(@RequestParam (name = "list")List<Integer> list){
         salemanService.batchDelete(list);
         return new JSONResult().ok("success");
