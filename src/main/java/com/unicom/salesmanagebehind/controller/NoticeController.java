@@ -94,11 +94,11 @@ public class NoticeController {
 
     @ApiOperation(value = "更新公告信息")
     @ApiImplicitParam(name ="params",value = "公告相关的参数",required = true,dataType = "String")
-    @PutMapping("/edit")
+    @PostMapping("/edit")
     public JSONResult update(@RequestParam String params) throws Exception {
 
         JSONObject json = JSON.parseObject(params);
-        System.out.println("前端传的值是" + json.toString());
+        //System.out.println("前端传的值是" + json.toString());
         Notice notice = new Notice();
         notice.setUpdateTime(new Date());
         notice.setNoticeId((int) json.get("noticeId"));
