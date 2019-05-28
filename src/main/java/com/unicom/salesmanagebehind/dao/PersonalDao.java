@@ -12,21 +12,11 @@ import java.util.List;
 @Mapper
 public interface PersonalDao {
 
-    //    @Select("select * from manager")
-    List<Manager> getList(@Param("managerId")Integer managerId,@Param("managerName")String managerName,@Param("loginName")String loginName,@Param("managerSex") String managerSex,@Param("managerEmail") String managerEmail,@Param("managerTel") String managerTel);
+    Manager getManagerInfoByToken(String token);
 
-    int addManager(Manager manager);
+    void updateManagerInfoByToken(Manager manager);
+//    String update(Manager manager);
 
-    int update(Manager manager);
 
-    int delete(Integer id);
-
-    int deleteAll(List list);
-
-    int deleteByPrimaryKey(int managerId);
-
-    int insert(Manager record);
-
-    int insertSelective(Manager record);
 
 }

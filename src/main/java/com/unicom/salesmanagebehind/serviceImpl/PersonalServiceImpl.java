@@ -13,13 +13,16 @@ public class PersonalServiceImpl implements PersonalService {
 
     @Autowired
     private PersonalDao personalDao;
-    public List<Manager> getList(Integer managerId,String managerName,String loginName,String managerSex,String managerEmail,String managerTel) {
-        return personalDao.getList(managerId,managerName,loginName,managerSex,managerEmail,managerTel);
+    public  Manager getManagerInfo(String token){
+        return personalDao.getManagerInfoByToken(token);
     }
+//    public String update(Manager manager){
+//        return personalDao.update(manager);
+//    }
+public  void updateManagerInfo(Manager manager){
+        personalDao.updateManagerInfoByToken(manager);
+}
 
-    public int update(Manager manager){
-        return personalDao.update(manager);
-    }
 
 
 }
