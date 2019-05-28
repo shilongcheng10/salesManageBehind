@@ -41,4 +41,7 @@ public interface ManagerDao {
     String getTokenById(int managerId);
 
     void updateTokenByToken(String token);
+    void updatePasswordByToken(Manager manager);
+
+    String getPasswordByToken(String token);
 }

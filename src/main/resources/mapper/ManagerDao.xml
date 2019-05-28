@@ -261,4 +261,19 @@
     where
         token = #{token,jdbcType=VARCHAR}
   </update>
+
+  <update id="updatePasswordByToken" parameterType="com.unicom.salesmanagebehind.model.Manager">
+      UPDATE  manager
+      SET
+        password= #{password,jdbcType=VARCHAR}
+      WHERE
+        token = #{token,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getPasswordByToken" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT  password
+      from manager
+    WHERE
+      token = #{token,jdbcType=VARCHAR}
+  </select>
 </mapper>

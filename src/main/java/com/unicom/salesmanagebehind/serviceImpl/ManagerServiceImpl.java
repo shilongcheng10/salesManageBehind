@@ -62,4 +62,14 @@ public class ManagerServiceImpl implements ManagerService {
     public void logout(String token) {
         managerDao.updateTokenByToken(token);
     }
+
+    @Override
+    public void updatePasswordByToken(Manager manager) {
+        managerDao.updatePasswordByToken(manager);
+    }
+
+    @Override
+    public String getPasswordByToken(String token) {
+        return managerDao.getPasswordByToken(token);
+    }
 }

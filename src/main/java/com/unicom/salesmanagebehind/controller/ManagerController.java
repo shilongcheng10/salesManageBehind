@@ -8,6 +8,8 @@ import com.unicom.salesmanagebehind.model.Manager;
 import com.unicom.salesmanagebehind.model.ResultPojo;
 import com.unicom.salesmanagebehind.service.ManagerService;
 import com.unicom.salesmanagebehind.utils.ResultUtils;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,43 @@ public class ManagerController {
     @Autowired
     private ManagerService managerService;
 
+    @ApiOperation(value = "管理员用户密码修改")
+    @ApiImplicitParam(name ="jsonObject",value = "前端传输的token，密码等信息",required = true,dataType = "JSONObject")
+    @Transactional
+    @PostMapping(value = "updatePassword")
+    public ResultPojo changePassword(@RequestBody JSONObject jsonObject){
+        String token = jsonObject.get("token").toString();
+        String oldPassword=jsonObject.get("oldPassword").toString();
+        String newPassword=jsonObject.get("newPassword").toString();
+        String confirmPassword=jsonObject.get("confirmPassword").toString();
+        if (token==null || token.equals("")){
+            return  ResultUtils.error(-1,"管理员用户token不能为空！");
+        }
+        if (oldPassword==null||oldPassword.equals("")){
+            return  ResultUtils.error(-2,"原密码不能为空！");
+        }
+        if (newPassword==null||newPassword.equals("")){
+            return  ResultUtils.error(-3,"新密码不能为空！");
+        }
+        if (confirmPassword==null||confirmPassword.equals("")){
+            return  ResultUtils.error(-4,"确认密码不能为空！");
+        }
+        if(!newPassword.equals(confirmPassword)){
+            return ResultUtils.error(-5,"两次输入的密码不一致！");
+        }
+        if (!(managerService.getPasswordByToken(token).equals(oldPassword))){
+            return ResultUtils.error(-7,"用户密码错误！");
+        }
+        Manager manager = new Manager();
+        manager.setToken(token);
+        manager.setPassword(newPassword);
+        try {
+            managerService.updatePasswordByToken(manager);
+            return ResultUtils.success("更新密码成功");
+        }catch (Exception e){
+            return ResultUtils.error(-6,"更新密码失败！");
+        }
+    }
     @Transactional
     @PostMapping("/login")
     public ResultPojo loginUser(@RequestBody Manager manager ) {

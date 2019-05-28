@@ -29,4 +29,7 @@ public interface ManagerService {
     Manager getUserInfoByToken(String token);
 
     void logout(String token);
+
+    void updatePasswordByToken(Manager manager);
+    String getPasswordByToken(String token);
 }
