@@ -18,10 +18,10 @@ public class Saleman {
     private String saleTelNum;
 
 
-    @ApiModelProperty(value="销售记录id",name="saleProductNum",required=true)
+    @ApiModelProperty(value="该销售人员销售套餐总数",name="saleProductNum",required=true)
     private int saleProductNum;
 
-    @ApiModelProperty(value="销售人员销售总利润",name="saleTotalPrice",required=true)
+    @ApiModelProperty(value="该销售人员销售总金额",name="saleTotalPrice",required=true)
     private int saleTotalPrice;
 
     @ApiModelProperty(value="销售人员是否删除标志",name="isDelete",required=true)
