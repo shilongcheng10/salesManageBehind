@@ -63,7 +63,7 @@ public class SalemanController {
      */
     @DeleteMapping (value = "delete")
     @ApiOperation(value = "删除记录")
-    @ApiImplicitParam( name="saleId",value = "营销人员编号",required=true,dataType="Integer")
+    @ApiImplicitParam( name="saleId",value = "营销人员编号",required=true,dataType="int")
     public JSONResult delete(@RequestParam (name = "saleId") int id){
         salemanService.deleteByPrimaryKey(id);
         return new JSONResult().ok("success");
