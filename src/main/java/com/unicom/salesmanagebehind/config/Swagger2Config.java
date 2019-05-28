@@ -29,8 +29,8 @@ public class Swagger2Config {
 
     public ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("基于springboot的触点营销后台管理系统后端框架")
-                .description("这是一个触点营销后台管理系统后端系统")
+                .title("基于springboot的触点营销后台管理系统")
+                .description("这是一个触点营销后台管理系统")
                 .termsOfServiceUrl("localhost:8080")
                 .version("0.0.1")
                 .build();
