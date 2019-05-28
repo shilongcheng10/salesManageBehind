@@ -5,7 +5,7 @@
     <id column="managerId" jdbcType="INTEGER" property="managerId" />
     <result column="managerName" jdbcType="VARCHAR" property="managerName" />
     <result column="loginName" jdbcType="VARCHAR" property="loginName" />
-    <result column="managerSex" jdbcType="VARCHAR" property="managerSex" />
+    <result column="managerSex" jdbcType="INTEGER" property="managerSex" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="managerTel" jdbcType="VARCHAR" property="managerTel" />
     <result column="managerEmail" jdbcType="VARCHAR" property="managerEmail" />
@@ -34,7 +34,7 @@
     insert into manager (managerName, loginName, managerSex,
       password, managerTel, managerEmail, token,
       isDelete)
-    values (#{managerName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{managerSex,jdbcType=VARCHAR},
+    values (#{managerName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{managerSex,jdbcType=INTEGER},
       #{password,jdbcType=VARCHAR}, #{managerTel,jdbcType=VARCHAR}, #{managerEmail,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR},
       #{isDelete,jdbcType=INTEGER})
   </insert>
@@ -75,7 +75,7 @@
         #{loginName,jdbcType=VARCHAR},
       </if>
       <if test="managerSex != null">
-        #{managerSex,jdbcType=VARCHAR},
+        #{managerSex,jdbcType=INTEGER},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -102,7 +102,7 @@
         loginName = #{loginName,jdbcType=VARCHAR},
       </if>
       <if test="managerSex != null">
-        managerSex = #{managerSex,jdbcType=VARCHAR},
+        managerSex = #{managerSex,jdbcType=INTEGER},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
@@ -125,7 +125,7 @@
     update manager
     set managerName = #{managerName,jdbcType=VARCHAR},
       loginName = #{loginName,jdbcType=VARCHAR},
-      managerSex = #{managerSex,jdbcType=VARCHAR},
+      managerSex = #{managerSex,jdbcType=INTEGER},
       password = #{password,jdbcType=VARCHAR},
       managerTel = #{managerTel,jdbcType=VARCHAR},
       managerEmail = #{managerEmail,jdbcType=VARCHAR},
@@ -186,7 +186,7 @@
         #{loginName,jdbcType=VARCHAR},
       </if>
       <if test="managerSex != null">
-        #{managerSex,jdbcType=VARCHAR},
+        #{managerSex,jdbcType=INTEGER},
       </if>
       <if test="managerTel != null">
         #{managerTel,jdbcType=VARCHAR},
@@ -204,7 +204,7 @@
     update manager
     set managerName = #{managerName,jdbcType=VARCHAR},
       loginName = #{loginName,jdbcType=VARCHAR},
-      managerSex = #{managerSex,jdbcType=VARCHAR},
+      managerSex = #{managerSex,jdbcType=INTEGER},
       managerTel = #{managerTel,jdbcType=VARCHAR},
       managerEmail = #{managerEmail,jdbcType=VARCHAR}
     where managerId = #{managerId,jdbcType=INTEGER}

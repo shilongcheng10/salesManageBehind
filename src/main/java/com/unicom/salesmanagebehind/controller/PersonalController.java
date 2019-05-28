@@ -6,11 +6,16 @@ import com.unicom.salesmanagebehind.model.JSONResult;
 import com.unicom.salesmanagebehind.model.Manager;
 import com.unicom.salesmanagebehind.model.ResultPojo;
 import com.unicom.salesmanagebehind.service.PersonalService;
+import com.unicom.salesmanagebehind.utils.ResultUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Api(tags = {"触点营销后台管理系统-个人信息修改模块"})
 @RestController
 @RequestMapping(value = "personal")
 public class PersonalController {
@@ -18,31 +23,45 @@ public class PersonalController {
     @Autowired
     private PersonalService personalService;
 
-    @GetMapping(value = "/list")
-    public JSONResult selectList(
-            @RequestParam(value = "page",defaultValue = "1") int page,
-            @RequestParam(value = "limit",defaultValue = "2") int limit,
-            @RequestParam(name = "managerId",defaultValue ="") Integer managerId,
-            @RequestParam(name = "managerName",defaultValue = "") String managerName,
-            @RequestParam(name = "loginName",defaultValue = "") String loginName,
-            @RequestParam(name = "managerSex",defaultValue = "") String managerSex,
-            @RequestParam(name = "managerEmail",defaultValue = "") String managerEmail,
-            @RequestParam(name = "managerTel",defaultValue = "") String managerTel
-    ) {
-        PageHelper.startPage(page,limit);
-
-        List<Manager> list = personalService.getList(managerId,managerName,loginName,managerSex,managerEmail,managerTel);
-
-        PageInfo<Manager> pageInfo =new PageInfo<>(list);
-
-        return new JSONResult().ok(pageInfo);
+    @ApiOperation(value = "获取当前管理员用户的信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name ="managerName",value = "管理员用户姓名",required = true,dataType = "String"),
+            @ApiImplicitParam(name ="loginName",value = "管理员用户的登录名",required = true,dataType = "String"),
+            @ApiImplicitParam(name ="managerSex",value = "管理员用户性别",required = true,dataType = "Integer"),
+            @ApiImplicitParam(name ="managerEmail",value = "管理员用户邮箱",required = true,dataType = "String"),
+            @ApiImplicitParam(name ="managerTel",value = "管理员用户的联系方式",required = true,dataType = "String"),
+    })
+    @GetMapping(value = "/getInfo")
+    public ResultPojo getManagerInfo(@RequestParam(name = "token") String token) {
+        if (token != null && !token.equals("")) {
+            Manager manager = personalService.getManagerInfo(token);
+            if (manager != null) {
+                return ResultUtils.success(manager);
+            } else {
+                return ResultUtils.error(-1, "获取用户信息失败");
+            }
+        }
+        return null;
     }
 
-    @PutMapping(value = "/update")
-    public JSONResult update(@RequestBody Manager manager){
-        personalService.update(manager);
+    @ApiOperation(value = "当前管理员用户信息更新")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name ="managerName",value = "管理员用户姓名",required = true,dataType = "String"),
+            @ApiImplicitParam(name ="loginName",value = "管理员用户的登录名",required = true,dataType = "String"),
+            @ApiImplicitParam(name ="managerSex",value = "管理员用户性别",required = true,dataType = "Integer"),
+            @ApiImplicitParam(name ="managerEmail",value = "管理员用户邮箱",required = true,dataType = "String"),
+            @ApiImplicitParam(name ="managerTel",value = "管理员用户的联系方式",required = true,dataType = "String"),
+    })
 
-        return new JSONResult().ok("success");
+    @PostMapping (value = "/putInfo")
+    public ResultPojo updateManagerInfo(@RequestBody Manager manager) {
+        if (manager.getToken() != null && !manager.getToken().equals("")) {
+            manager.setToken(manager.getToken());
+          personalService.updateManagerInfo(manager);
+//            personalService.updateManagerInfo(manager);
+                return getManagerInfo(manager.getToken());
+        }
+        return null;
     }
 
 
