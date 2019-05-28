@@ -1,10 +1,12 @@
 package com.unicom.salesmanagebehind.utils;
 
 import com.unicom.salesmanagebehind.model.ResultPojo;
+import io.swagger.annotations.Api;
 
 /**
  * 结果处理工具类
  */
+@Api(tags = {"返回结果处理工具"})
 public class ResultUtils {
 
     public static ResultPojo success() {

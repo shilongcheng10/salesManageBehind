@@ -1,7 +1,11 @@
 package com.unicom.salesmanagebehind.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.List;
 
+@ApiModel(description="返回结果包装类")
 public class JSONResult {
 
     class DataObject {
@@ -33,9 +37,11 @@ public class JSONResult {
         }
     }
 
+    @ApiModelProperty(value="返回报文",name="code",required=true)
     private int code;
+    @ApiModelProperty(value="返回数据",name="data",required=true)
     private Object data;
-    private String msg;
+
 
 
     public int getCode() {
@@ -54,21 +60,14 @@ public class JSONResult {
         this.data = data;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     public JSONResult() {
     }
 
-    public JSONResult(int code, DataObject data, String msg) {
+    public JSONResult(int code, DataObject data) {
         this.code = code;
         this.data = data;
-        this.msg = msg;
+
     }
 
     public JSONResult ok(Object datalist) {

@@ -1,6 +1,7 @@
 package com.unicom.salesmanagebehind.utils;
 
 import com.unicom.salesmanagebehind.model.ResultPojo;
+import io.swagger.annotations.Api;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +15,8 @@ import java.util.UUID;
  * @author: Shilongcheng
  * @create: 2019-05-22 21:11
  **/
+
+@Api(tags = {"文件上传模块工具类","文件删除模块工具类"})
 public class FileUtils {
     
     public static ResultPojo upload(MultipartFile file){

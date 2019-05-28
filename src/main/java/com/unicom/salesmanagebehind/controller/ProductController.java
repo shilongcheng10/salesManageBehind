@@ -9,6 +9,10 @@ import com.unicom.salesmanagebehind.service.ProductService;
 import com.unicom.salesmanagebehind.utils.DateUtil;
 import com.unicom.salesmanagebehind.utils.FileUtils;
 import com.unicom.salesmanagebehind.utils.ResultUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +28,7 @@ import java.util.List;
  * @author: Shilongcheng
  * @create: 2019-05-21 10:12
  **/
+@Api(tags = {"触点营销后台管理系统-套餐管理模块"})
 @RestController
 @RequestMapping(value = "product")
 public class ProductController {
@@ -35,6 +40,8 @@ public class ProductController {
     private ManagerService managerService;
 
 
+    @ApiOperation(value = "添加套餐信息")
+    @ApiImplicitParam(name = "product",value="套餐数据",required = true,dataType = "Product")
     @Transactional
     @RequestMapping(value="add",method = RequestMethod.POST)
     public ResultPojo addProduct(@RequestBody Product product){
@@ -53,12 +60,16 @@ public class ProductController {
         return ResultUtils.success("插入成功",product);
     }
 
-
-    @RequestMapping(value = "upload")
+    @ApiOperation(value = "套餐图片上传")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "picture",value="套餐图片",required = true,dataType = "MultipartFile"),
+            @ApiImplicitParam(name = "request",value = "前端request请求",required = true,dataType = "HttpServletRequest")})
+    @RequestMapping(value = "upload",method = RequestMethod.POST)
     public ResultPojo uploadImg(MultipartFile picture, HttpServletRequest request){
         return FileUtils.upload(picture);
     }
 
+    @ApiOperation(value = "获取套餐列表信息")
     @RequestMapping(value = "list",method = RequestMethod.GET)
     public ResultPojo getList(){
         List<Product> list=productService.getList();
@@ -71,6 +82,8 @@ public class ProductController {
         return ResultUtils.success("获得列表成功",list);
     }
 
+    @ApiOperation(value = "更新套餐信息")
+    @ApiImplicitParam(name = "product",value = "等待更新的套餐信息",required = true,dataType = "Product")
     @Transactional
     @RequestMapping(value="update",method = RequestMethod.POST)
     public ResultPojo editProduct(@RequestBody Product product){
@@ -101,6 +114,8 @@ public class ProductController {
 
     }
 
+    @ApiOperation(value = "获取套餐详情")
+    @ApiImplicitParam(name ="params",value = "套餐相关的参数",required = true,dataType = "String")
     @RequestMapping(value="detail",method = RequestMethod.GET)
     public ResultPojo getItemInfo(@RequestParam String params){
         JSONObject jsonObject = JSONObject.parseObject(params);
@@ -114,6 +129,8 @@ public class ProductController {
 
     }
 
+    @ApiOperation(value = "设置该套餐为首推套餐")
+    @ApiImplicitParam(name ="params",value = "套餐相关的参数",required = true,dataType = "String")
     @Transactional
     @RequestMapping(value="setFirstPush",method = RequestMethod.PUT)
     public ResultPojo setFirstPush(@RequestParam String params){
@@ -135,6 +152,8 @@ public class ProductController {
         }
     }
 
+    @ApiOperation(value = "删除套餐信息")
+    @ApiImplicitParam(name ="params",value = "套餐相关的参数",required = true,dataType = "String")
     @Transactional
     @RequestMapping(value="delete",method = RequestMethod.PUT)
     public ResultPojo deleteItem(@RequestParam String params){
