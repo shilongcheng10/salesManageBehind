@@ -1,0 +1,1366 @@
+
+[[_paths]]
+== Paths
+
+[[_getmonthsalesusingget]]
+=== 获取月销售数据
+....
+GET /MonthSale/list
+....
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-月销售报表模块
+
+
+[[_showmoneyusingget]]
+=== showMoney
+....
+GET /dashboard/moneyList
+....
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-首页数据展示模块
+
+
+[[_showproductusingget]]
+=== showProduct
+....
+GET /dashboard/productList
+....
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-首页数据展示模块
+
+
+[[_showsalemanusingget]]
+=== showSaleMan
+....
+GET /dashboard/saleManList
+....
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-首页数据展示模块
+
+
+[[_insertusingpost]]
+=== 新增管理员用户
+....
+POST /manager/add
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**manager** +
+__required__|即将添加的管理员的信息|<<_manager,Manager>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-管理员管理模块
+
+
+[[_deleteusingdelete]]
+=== 删除管理员用户
+....
+DELETE /manager/delete
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**managerId** +
+__required__|管理员用户编码|ref
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-管理员管理模块
+
+
+[[_deleteallusingdelete]]
+=== 删除所有管理员用户
+....
+DELETE /manager/deleteAll
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**list** +
+__required__|管理员用户编码列表|ref
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-管理员管理模块
+
+
+[[_getinfousingget]]
+=== 获取当前管理员用户的信息
+....
+GET /manager/info
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**token** +
+__required__|当前登录用户的token信息|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-管理员管理模块
+
+
+[[_selectlistusingget]]
+=== 获取当前管理员用户列表信息
+....
+GET /manager/list
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**limit** +
+__required__|一页中显示管理员用户的数量|integer (int32)
+|**Query**|**loginName** +
+__required__|管理员用户的登录名|string
+|**Query**|**managerId** +
+__required__|管理员用户编码|ref
+|**Query**|**managerName** +
+__required__|管理员用户姓名|string
+|**Query**|**managerTel** +
+__required__|管理员用户的联系方式|string
+|**Query**|**page** +
+__required__|列表显示管理员用户的页数|integer (int32)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-管理员管理模块
+
+
+[[_loginuserusingpost]]
+=== 当前管理员用户登录处理
+....
+POST /manager/login
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**manager** +
+__required__|当前管理员的登录信息|<<_manager,Manager>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-管理员管理模块
+
+
+[[_logoutusingpost]]
+=== 当前登录管理员用户登出
+....
+POST /manager/logout
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**token** +
+__required__|管理员用户编码列表|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-管理员管理模块
+
+
+[[_updateusingput]]
+=== 管理员用户信息更新
+....
+PUT /manager/update
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**manager** +
+__required__|要修改的管理员用户的信息|<<_manager,Manager>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-管理员管理模块
+
+
+[[_changepasswordusingpost]]
+=== 管理员用户密码修改
+....
+POST /manager/updatePassword
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**jsonObject** +
+__required__|前端传输的token，密码等信息|<<_jsonobject,JSONObject>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-管理员管理模块
+
+
+[[_addnoticeusingpost]]
+=== 新增公告
+....
+POST /notice/add
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**params** +
+__required__|公告相关的参数|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-公告管理模块
+
+
+[[_deletebyidsusingdelete]]
+=== 公告列表显示
+....
+DELETE /notice/batchremove
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**ids** +
+__required__|公告编码列表|ref
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-公告管理模块
+
+
+[[_updateusingpost]]
+=== 更新公告信息
+....
+POST /notice/edit
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**params** +
+__required__|公告相关的参数|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-公告管理模块
+
+
+[[_selectlistusingget_1]]
+=== 公告列表显示
+....
+GET /notice/list
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**limit** +
+__required__|一页中显示的条数|integer (int32)
+|**Query**|**noticeTitle** +
+__required__|公告标题|string
+|**Query**|**page** +
+__required__|列表显示页数|integer (int32)
+|**Query**|**updateTime** +
+__required__|更新时间|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-公告管理模块
+
+
+[[_deleteusingdelete_1]]
+=== 删除公告
+....
+DELETE /notice/remove
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**noticeId** +
+__required__|公告ID|integer (int32)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-公告管理模块
+
+
+[[_getmanagerinfousingget]]
+=== 获取当前管理员用户的信息
+....
+GET /personal/getInfo
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**token** +
+__required__|当前管理员登录的token|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-个人信息修改模块
+
+
+[[_updatemanagerinfousingpost]]
+=== 当前管理员用户信息更新
+....
+POST /personal/putInfo
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**manager** +
+__required__|前端传输过来的更新的管理员信息|<<_manager,Manager>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-个人信息修改模块
+
+
+[[_addproductusingpost]]
+=== 添加套餐信息
+....
+POST /product/add
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**product** +
+__required__|套餐数据|<<_product,Product>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-套餐管理模块
+
+
+[[_deleteitemusingput]]
+=== 删除套餐信息
+....
+PUT /product/delete
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**params** +
+__required__|套餐相关的参数|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-套餐管理模块
+
+
+[[_getiteminfousingget]]
+=== 获取套餐详情
+....
+GET /product/detail
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**params** +
+__required__|套餐相关的参数|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-套餐管理模块
+
+
+[[_getlistusingget]]
+=== 获取套餐列表信息
+....
+GET /product/list
+....
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-套餐管理模块
+
+
+[[_setfirstpushusingput]]
+=== 设置该套餐为首推套餐
+....
+PUT /product/setFirstPush
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**params** +
+__required__|套餐相关的参数|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-套餐管理模块
+
+
+[[_editproductusingpost]]
+=== 更新套餐信息
+....
+POST /product/update
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**product** +
+__required__|等待更新的套餐信息|<<_product,Product>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-套餐管理模块
+
+
+[[_uploadimgusingpost]]
+=== 套餐图片上传
+....
+POST /product/upload
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**FormData**|**picture** +
+__required__|套餐图片|ref
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultpojo,ResultPojo>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `multipart/form-data`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-套餐管理模块
+
+
+[[_batchdeleteusingdelete]]
+=== 批量删除记录
+....
+DELETE /saleman/batchdel
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**list** +
+__required__|list|< integer (int32) > array(multi)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-营销人员管理模块
+
+
+[[_deleteusingdelete_2]]
+=== 删除记录
+....
+DELETE /saleman/delete
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**saleId** +
+__required__|营销人员编号|integer (int32)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-营销人员管理模块
+
+
+[[_selectlistusingget_2]]
+=== 获取列表
+....
+GET /saleman/getList
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**limit** +
+__required__|每页条数|integer (int32)
+|**Query**|**page** +
+__required__|分页分码|integer (int32)
+|**Query**|**saleId** +
+__required__|营销人员编号|ref
+|**Query**|**saleName** +
+__required__|营销人员姓名|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-营销人员管理模块
+
+
+[[_insertusingpost_1]]
+=== 新增记录
+....
+POST /saleman/insert
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**saleman** +
+__required__|新增营销人员|<<_saleman,Saleman>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-营销人员管理模块
+
+
+[[_updateusingput_1]]
+=== 更新记录
+....
+PUT /saleman/update
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**saleman** +
+__required__|更新营销人员|<<_saleman,Saleman>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-营销人员管理模块
+
+
+[[_getuserlistusingget]]
+=== 获取用户信息列表
+....
+GET /user/list
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**fee** +
+__required__|消费金额|integer (int32)
+|**Query**|**limit** +
+__required__|每页条数|string
+|**Query**|**onlineTime** +
+__required__|在网时长|integer (int32)
+|**Query**|**page** +
+__required__|分页页码|string
+|**Query**|**productName** +
+__required__|产品名字|string
+|**Query**|**tel** +
+__required__|手机号码|string
+|**Query**|**userName** +
+__required__|用户姓名|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_jsonresult,JSONResult>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 触点营销后台管理系统-用户信息模块
+
+
+

@@ -1,0 +1,130 @@
+
+[[_definitions]]
+== Definitions
+
+[[_jsonresult]]
+=== JSONResult
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|object
+|===
+
+
+[[_manager]]
+=== Manager
+管理员信息
+
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**isDelete** +
+__required__|是否已被删除|integer (int32)
+|**loginName** +
+__required__|登录账户名|string
+|**managerEmail** +
+__required__|管理员邮箱|string
+|**managerId** +
+__required__|管理员id|integer (int32)
+|**managerName** +
+__required__|管理员姓名|string
+|**managerSex** +
+__required__|管理员性别|integer (int32)
+|**managerTel** +
+__required__|管理员手机号|string
+|**password** +
+__required__|登录密码|string
+|**role** +
+__optional__||integer (int32)
+|**token** +
+__required__|当前用户登录token(唯一)|string
+|===
+
+
+[[_product]]
+=== Product
+套餐信息数据
+
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**description** +
+__required__|套餐详细描述|string
+|**endTime** +
+__required__|套餐失效时间|string (date-time)
+|**imgUrl** +
+__required__|套餐图片路径|string
+|**isDelete** +
+__required__|套餐是否被删除标志|integer (int32)
+|**isFirstPush** +
+__required__|是否首推套餐|integer (int32)
+|**productFee** +
+__required__|套餐资费|integer (int32)
+|**productId** +
+__required__|套餐id|integer (int32)
+|**productName** +
+__required__|套餐名称|string
+|**recommend** +
+__required__|套餐简介|string
+|**salesCount** +
+__required__|该套餐历史销售数量|integer (int32)
+|**startTime** +
+__required__|套餐生效时间|string (date-time)
+|**updateTime** +
+__required__|套餐最近更新时间|string (date-time)
+|**updateUser** +
+__required__|套餐信息最近更新人|string
+|===
+
+
+[[_resultpojo]]
+=== ResultPojo
+返回结果包装类
+
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|返回结果报文|integer (int32)
+|**data** +
+__required__|返回结果数据|object
+|**msg** +
+__required__|返回结果信息|string
+|===
+
+
+[[_saleman]]
+=== Saleman
+销售人员实体对象
+
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**isDelete** +
+__required__|销售人员是否删除标志|integer (int32)
+|**saleId** +
+__required__|销售人员id|integer (int32)
+|**saleName** +
+__required__|销售人员姓名|string
+|**saleProductNum** +
+__required__|该销售人员销售套餐总数|integer (int32)
+|**saleSex** +
+__required__|销售人员性别|integer (int32)
+|**saleTelNum** +
+__required__|销售人员手机号|string
+|**saleTotalPrice** +
+__required__|该销售人员销售总金额|integer (int32)
+|**salesCount** +
+__required__|该营销人员销售情况|integer (int32)
+|===
+
+
+
